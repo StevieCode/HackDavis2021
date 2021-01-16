@@ -16,6 +16,10 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 
+import firebase from 'firebase';
+
+
+
 
 const AppTabs = createBottomTabNavigator({
   Home: {
@@ -60,7 +64,7 @@ export default createAppContainer(
       },   
     },
     {
-      initialRouteName: "App"
+      initialRouteName: "Loading"
     }
   )
 );
