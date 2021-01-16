@@ -2,6 +2,8 @@ import React from 'react';
 import { Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import RegisterUser from '../services/RegisterUser';
 import styles from '../styles/RegisterScreenStyles';
+import * as firebase from 'firebase';
+import Fire from '../Fire';
 
 export default class RegisterScreen extends React.Component {
     state = {
