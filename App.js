@@ -28,7 +28,9 @@ const firebaseConfig = {
   measurementId: "G-5JB0DZS1QC"
 };
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.app.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 
 
@@ -75,7 +77,7 @@ export default createAppContainer(
       },   
     },
     {
-      initialRouteName: "Loading"
+      initialRouteName: "App"
     }
   )
 );

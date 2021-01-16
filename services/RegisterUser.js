@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 
 export default function RegisterUser(phoneNumber, firstName, lastName, password) {
-    firebase.auth().createUserWithEmailAndPassword(phoneNumber, password)
+    firebase.auth().createUserWith(phoneNumber, password)
             .then(registeredUser => {
                 firebase.firestore()
                 .collection('users')
