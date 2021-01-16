@@ -2,18 +2,21 @@ import React from 'react';
 import { Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import RegisterUser from '../services/RegisterUser';
 import styles from '../styles/RegisterScreenStyles';
+import * as firebase from 'firebase';
+import Fire from '../Fire';
 
 export default class RegisterScreen extends React.Component {
     state = {
         firstName: "",
         lastName: "",
         phoneNumber: "",
+        email: "",
         password: "",
         errorMessage: null,
     }
 
     handleSignUp = () => {
-        RegisterUser(this.state.phoneNumber, this.state.firstName, this.state.lastName, this.state.password);
+        RegisterUser(this.state.firstName, this.state.lastName, this.state.phoneNumber, this.state.email, this.state.password);
     }
 
     render(){
@@ -53,6 +56,15 @@ export default class RegisterScreen extends React.Component {
                             style={styles.input}
                             onChangeText={phoneNumber => this.setState({phoneNumber})}
                             value = {this.state.phoneNumber}
+                            ></TextInput>
+                    </View>
+
+                    <View style={{marginTop: 30}}>
+                        <Text style={styles.inputTitle}> EMAIL </Text>
+                        <TextInput 
+                            style={styles.input}
+                            onChangeText={email => this.setState({email})}
+                            value = {this.state.email}
                             ></TextInput>
                     </View>
 
