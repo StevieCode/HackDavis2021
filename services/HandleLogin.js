@@ -1,8 +1,8 @@
 import firebase from 'firebase';
 
-export default function HandleLogin(phoneNumber, password) {
+export default function HandleLogin(email, password) {
     firebase
         .auth()
-        .signInWithEmailAndPassword(phoneNumber, password)
+        .signInWithEmailAndPassword(email, password)
         .catch(error => this.setState({errorMessage: error.message}));
 }
