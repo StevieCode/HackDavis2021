@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 
+
 export default function RegisterUser(firstName, lastName, phoneNumber, email, password) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(registeredUser => {

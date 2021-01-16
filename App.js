@@ -18,9 +18,6 @@ import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 
 import firebase from 'firebase';
 
-
-
-
 const AppTabs = createBottomTabNavigator({
   Home: {
     screen: HomeScreen,
@@ -64,7 +61,7 @@ export default createAppContainer(
       },   
     },
     {
-      initialRouteName: "Loading"
+      initialRouteName: "App"
     }
   )
 );
