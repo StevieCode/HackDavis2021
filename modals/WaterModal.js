@@ -3,6 +3,9 @@ import { Text, View, ImageBackground, Modal, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '../styles/WaterModalStyles';
+import { AntDesign } from '@expo/vector-icons';
+import * as firebase from 'firebase';
+import Fire from '../Fire';
 
 
 export default WaterModal = props => {

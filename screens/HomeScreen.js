@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { render } from 'react-dom';
 import { ImagePropTypes, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -6,12 +6,16 @@ import SleepModal from '../modals/SleepModal';
 import WaterModal from '../modals/WaterModal';
 import ExerciseModal from '../modals/ExerciseModal';
 
+import UpdateWater from '../services/UpdateWater';
+import * as firebase from 'firebase';
+import Fire from '../Fire';
+
 export default function HomeScreen() {
 
     const [curWater, setCurWater] = useState(0);
     const [goalWater, setGoalWater] = useState(0);
     const [toggleWaterModal, setToggleWaterModal] = useState(false);
-
+     
     const [curSleep, setCurSleep] = useState(0);
     const [goalSleep, setGoalSleep] = useState(0);
     const [toggleSleepModal, setToggleSleepModal] = useState(false);
@@ -19,6 +23,27 @@ export default function HomeScreen() {
     const [curExercise, setCurExercise] = useState(0);
     const [goalExercise, setGoalExercise] = useState(0);
     const [toggleExerciseModal, setToggleExerciseModal] = useState(false);
+
+    function closeWater(curWater, goalWater){
+        UpdateWater(curWater, goalWater);
+        setToggleWaterModal(false);
+    }
+    
+    useEffect(() => {
+        const user = firebase.auth().currentUser;
+        const userRef = firebase.firestore().collection('users').doc(user.uid);
+        if (toggleWaterModal === false){
+            userRef.get().then(function(doc) {
+                setCurWater(doc.data().water[0])
+                setGoalWater(doc.data().water[1])
+                console.log(doc.data().water);
+            });
+
+        }
+
+    });
+  
+
 
     function CurWaterHandler(change) {
         if (curWater <= 0 && change < 0) {
@@ -91,7 +116,7 @@ export default function HomeScreen() {
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <TouchableOpacity
                     onPress = {() => setToggleWaterModal(true)}>
-                    <Text>Water: {curWater}</Text>
+                    <Text>Water: {curWater} / {goalWater}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -106,9 +131,9 @@ export default function HomeScreen() {
 
                 <WaterModal
                     visible = {toggleWaterModal}
-                    ok = {() => setToggleWaterModal(false)}
                     curWater = {curWater}
                     goalWater = {goalWater}
+                    ok = {() => {closeWater(curWater, goalWater)}}
                     addCurWater = {() => {CurWaterHandler(1)}}
                     minusCurWater = {() => {CurWaterHandler(-1)}}
                     addGoalWater = {() => {GoalWaterHandler(1)}}

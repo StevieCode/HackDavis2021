@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from 'react';
-import { Text, View, TouchableOpacity, ActivityIndicator, SafeAreaView, FlatList, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, ActivityIndicator, SafeAreaView, FlatList, ScrollView, StyleSheet } from 'react-native';
 import * as SMS from 'expo-sms';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -113,12 +113,9 @@ export default function SocialScreen() {
                     friends.push(i);
                 }
             }  
-
             setFriends(friends);
-            console.log(friends);
             setLoading(false);
       });
-
       // Unsubscribe from events when no longer in use
       return () => subscriber();
   }, []);
@@ -126,7 +123,6 @@ export default function SocialScreen() {
   if (loading) {
       return <ActivityIndicator />;
   }
-
 
     function handleItemClick({index}) {
         console.log(index);
@@ -137,8 +133,21 @@ export default function SocialScreen() {
     };
 
 
-    return (
+  renderSeparator = () => {
 
+    return (
+      <View
+        style={{
+          height: 1,
+          width: '86%',
+          backgroundColor: '#CED0CE',
+          marginLeft: '5%'
+        }}
+      />
+    )
+  }
+
+    return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' , marginTop: 120, backgroundColor: "#3b5998"}}>
             <FontAwesome5 name="user-friends" size={30} color="black" />
         
@@ -180,7 +189,31 @@ export default function SocialScreen() {
                 back = {() => setFriendModalToggle(false)}
             />
             
-                
+           
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#f8f8f8',
+      alignItems: 'center'
+    },
+    text: {
+      fontSize: 20,
+      color: '#101010',
+      marginTop: 60,
+      fontWeight: '700'
+    },
+    listItem: {
+      marginTop: 8,
+      padding: 8,
+      alignItems: 'center',
+      backgroundColor: 'white',
+      width: '100%'
+    },
+    listItemText: {
+      fontSize: 18
+    }
+  });
