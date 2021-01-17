@@ -16,6 +16,15 @@ export default StyleSheet.create({
         color: "white",
         fontSize: 32.
     },
+    header2: {
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        paddingHorizontal: 32,
+        paddingVertical: 12,
+        borderBottomWidth: 50,
+        color: "blue",
+        fontSize: 32.
+    },
     regText: {
         margin: 8,
         flexDirection: "row",
@@ -33,8 +42,8 @@ export default StyleSheet.create({
     changeContainer: {
         fontSize: 20,
         alignSelf: "center",
-        marginLeft: 10,
-        marginTop: 50,  
+        marginLeft: 0,
+        marginTop: 20,  
     },
     altChangeContainer: {
         fontSize: 20,
@@ -50,7 +59,6 @@ export default StyleSheet.create({
         borderBottomRightRadius: 20,
         overlayColor: "#556789"
     },
-
     profileImg: {
         height: 120,
         width: 120,
@@ -64,37 +72,4 @@ export default StyleSheet.create({
         borderRadius: 60,
         overflow: 'hidden',
     },
-
-
-
-    curContainer: {
-        fontSize: 20,
-        alignSelf: "center",
-        marginLeft: "35%",
-        marginTop: "20%",
-    },
-    goalContainer: {
-        fontSize: 20,
-        alignSelf: "center",
-        marginLeft: "35%",
-        marginTop: "50%",
-    },
-    waterText: {
-        fontSize: 20,
-        alignSelf: "center",
-        color: "black",
-        fontWeight: "500",
-    },
-    backgroundImage: {
-        flex: 1,
-        resizeMode: 'cover',
-
-    },
-    arrow: {
-        resizeMode: "contain",
-        width: 50,
-        height: 50,
-        alignSelf: "center",
-    }
-    
 });

@@ -23,20 +23,20 @@ export default function LeaderBoardScreen() {
 
         if (selectedImage !== null) {
             return (
-              <View style={styles.container}>
-                  <Text  style= {styles.header}>WHAT THE HEALTH</Text>
-                  <TouchableHighlight style={[styles.profileImgContainer, { borderColor: 'white', borderWidth:3 }]}>
-                    <Image source={{ uri: selectedImage.localUri }}style={styles.profileImg}/>
-                    </TouchableHighlight>
-                         <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
-                            <View style= {styles.altChangeContainer}>
-                                <Ionicons name="create-outline" size={20} color="white" />
-                            </View>
-                        </TouchableOpacity>
-                    <Text  style= {styles.fullName}> John Doe</Text>
-                    <Text  style= {styles.regText}> 1(650)223-2932</Text>
-                    <Text  style= {styles.regText}> JohnDoe22@gmail.com</Text>
-              </View>
+                  <View style={styles.container}>
+                    <Text  style= {styles.header}>WHAT THE HEALTH</Text>
+                    <TouchableHighlight style={[styles.profileImgContainer, { borderColor: 'white', borderWidth:3 }]}>
+                        <Image source={{ uri: selectedImage.localUri }}style={styles.profileImg}/>
+                        </TouchableHighlight>
+                            <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
+                                <View style= {styles.altChangeContainer}>
+                                    <Ionicons name="create-outline" size={20} color="white" />
+                                </View>
+                            </TouchableOpacity>
+                        <Text  style= {styles.fullName}> John Doe</Text>
+                        <Text  style= {styles.regText}> 1(650)223-2932</Text>
+                        <Text  style= {styles.regText}> JohnDoe22@gmail.com</Text>
+                 </View>
             );
       }
     
@@ -53,5 +53,6 @@ export default function LeaderBoardScreen() {
             <Text  style= {styles.regText}> 1(650)223-2932</Text>
             <Text  style= {styles.regText}> JohnDoe22@gmail.com</Text>
         </View>
+    
     )
 }
