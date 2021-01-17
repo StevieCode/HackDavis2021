@@ -13,6 +13,7 @@ export default class RegisterScreen extends React.Component {
         email: "",
         password: "",
         errorMessage: null,
+        friends: {}
     }
 
     handleSignUp = () => {
