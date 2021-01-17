@@ -5,12 +5,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import SleepModal from '../modals/SleepModal';
 import WaterModal from '../modals/WaterModal';
 import ExerciseModal from '../modals/ExerciseModal';
+import styles from '../styles/HomeScreenStyles'
 
 import UpdateWater from '../services/UpdateWater';
 import * as firebase from 'firebase';
 import Fire from '../Fire';
 import UpdateExercise from '../services/UpdateExercise';
 import UpdateSleep from '../services/UpdateSleep';
+
 export default function HomeScreen() {
 
     const [curWater, setCurWater] = useState(0);
@@ -134,7 +136,7 @@ export default function HomeScreen() {
 
 
     return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={styles.container}>
                 <TouchableOpacity
                     onPress = {() => setToggleWaterModal(true)}>
                     <Text>Water: {curWater} / {goalWater}</Text>
