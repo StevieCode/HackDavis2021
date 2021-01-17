@@ -1,54 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import { Text, View, ActivityIndicator, SafeAreaView, FlatList} from 'react-native';
-// import * as firebase from 'firebase';
-// import Fire from '../Fire';
-
-// export default function SocialScreen() {
-//     const [loading, setLoading] = useState(true); // Set loading to true on component mount
-//     const [friends, setFriends] = useState([]); // Initial empty array of users
-
-//     useEffect(() => {
-//         const user = firebase.auth().currentUser
-//         const subscriber = firebase.firestore()
-//         .collection('users')
-//         .doc(user.uid)
-//         .onSnapshot(queryDocumentSnapshot => {
-//             const friends = []
-//             for (var i in queryDocumentSnapshot.get('friends')){
-//                 if (queryDocumentSnapshot.get('friends')[i] === true){
-//                     friends.push(i);
-//                 }
-//             }          
-//               setFriends(friends);
-//               console.log(friends);
-//               setLoading(false);
-//         });
-
-//         // Unsubscribe from events when no longer in use
-//         return () => subscriber();
-//     }, []);
-
-//     if (loading) {
-//         return <ActivityIndicator />;
-//     }
-//     return (
-//         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//             <Text>Social Page</Text>
-//             <SafeAreaView>
-//             <FlatList
-//                 data={friends}
-//                 keyExtractor={(item, index) => item.key}
-//                 renderItem={({item}) => (
-//                     <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//                         <Text>Friend: {item}</Text>
-//                     </View>
-//                 )}
-//             />
-//             </SafeAreaView>
-//         </View>
-//     )
-// }
-
 import React, { useState, useEffect, Component } from 'react';
 import { Text, View, TouchableOpacity, ActivityIndicator, SafeAreaView, FlatList, ScrollView, StyleSheet } from 'react-native';
 import * as SMS from 'expo-sms';
@@ -58,7 +7,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import {ExpandableListView} from 'react-native-expandable-listview';
 import * as firebase from 'firebase';
 import Fire from '../Fire';
-
+import FriendModal from '../modals/FriendModal'
 
 
 // Aim to store phone number -> for messaging someone
@@ -150,6 +99,8 @@ export default function SocialScreen() {
     const [loading, setLoading] = useState(true); // Set loading to true on component mount
     const [friends, setFriends] = useState([]); // Initial empty array of users
 
+    const [friendModalToggle, setFriendModalToggle] = useState(false);
+
     useEffect(() => {
         const user = firebase.auth().currentUser
         const subscriber = firebase.firestore()
@@ -173,7 +124,17 @@ export default function SocialScreen() {
       return <ActivityIndicator />;
   }
 
+    function handleItemClick({index}) {
+        console.log(index);
+    };
+
+    function handleInnerItemClick({innerIndex, item, itemIndex}) {
+        console.log(innerIndex);
+    };
+
+
   renderSeparator = () => {
+
     return (
       <View
         style={{
@@ -189,9 +150,10 @@ export default function SocialScreen() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' , marginTop: 120, backgroundColor: "#3b5998"}}>
             <FontAwesome5 name="user-friends" size={30} color="black" />
+        
             <View style={{flexDirection: 'row'}}>
                 <Text style={{ fontSize: 30, color: 'black' }}>Friends List ({friends.length}) </Text> 
-                <Ionicons name="person-add" size={24} color="black" />
+                <Ionicons name="person-add" size={24} color="black" onPress = {()=>setFriendModalToggle(true)}/>
             </View>
             <Text style={{ fontSize: 18, color: 'white' }}> </Text> 
             <Text style={{ fontSize: 18, color: 'white' }}>Remind your friends to stay healthy</Text>
@@ -202,22 +164,32 @@ export default function SocialScreen() {
                 <FlatList
                     data={friends}
                     renderItem={({item}) => (
-                        <View style={styles.listItem}>
-                            <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: "row" }}>
-                                <Text style={{  color: "#3b5998" }}> Friend: {item}</Text>
-                                <View style={{flexDirection: 'row'}}>
-                                    <FontAwesome.Button onPress={() => SMS.sendSMSAsync(
-                                        ['6504779097'],
-                                        'Drink some more water!',)}
-                                    style={{ backgroundColor: 'white', flexDirection: "row"}}>
-                                        <Ionicons name="chatbubble-ellipses-outline" size={20} color="black" />
-                                    </FontAwesome.Button>
-                                </View>
+                        <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: "row" }}>
+                            <Text>Friend: {item}</Text>
+                            <View style={{flexDirection: 'row'}}>
+                                <FontAwesome.Button onPress={() => SMS.sendSMSAsync(
+                                    ['6504779097'],
+                                    'Drink some more water!',)}
+                                style={{ backgroundColor: '#3b5998'}}>
+                                    <Ionicons name="chatbubble-ellipses-outline" size={20} color="black" />
+                                </FontAwesome.Button>
                             </View>
+
+                            
                         </View>
+
                     )}
                 />
+
+           
             </SafeAreaView>
+
+            <FriendModal 
+                visible = {friendModalToggle}
+                back = {() => setFriendModalToggle(false)}
+            />
+            
+           
         </View>
     );
 };
