@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, ImageBackground, Modal, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import styles from '../styles/WaterModalStyles';
+import styles from '../styles/SleepModalStyles';
 
 export default SleepModal = props => {
     
