@@ -1,16 +1,36 @@
 import React, { useState } from 'react';
 import { render } from 'react-dom';
-import { Text, View } from 'react-native';
+import { ImagePropTypes, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import WaterModal from '../modals/WaterModal';
 
 export default function HomeScreen() {
 
-    const [curWater, setCurWarer] = useState(0);
+    const [curWater, setCurWater] = useState(0);
     const [goalWater, setGoalWater] = useState(0);
     const [toggleWaterModal, setToggleWaterModal] = useState(false);
 
+    function CurWaterHandler(change) {
+        if (curWater <= 0 && change < 0) {
+            console.log("Can't have less");
+            return
+        } else if (curWater > goalWater) {
+            console.log("Too much water");
+        }
 
+        setCurWater(curWater + change)
+    }
+
+    function GoalWaterHandler(change) {
+        if (goalWater <= 0 && change < 0) {
+            console.log("Can't have less");
+            return
+        } else if (curWater > goalWater) {
+            console.log("Too little water");
+        }
+
+        setGoalWater(goalWater + change)
+    }
 
 
     return (
@@ -33,8 +53,13 @@ export default function HomeScreen() {
 
                 <WaterModal
                     visible = {toggleWaterModal}
-                    onCancel = {() => setToggleWaterModal(false)}
-                    ok = {() => console.log("HELLo")}
+                    ok = {() => setToggleWaterModal(false)}
+                    curWater = {curWater}
+                    goalWater = {goalWater}
+                    addCurWater = {() => {CurWaterHandler(1)}}
+                    minusCurWater = {() => {CurWaterHandler(-1)}}
+                    addGoalWater = {() => {GoalWaterHandler(1)}}
+                    minusGoalWater = {() => {GoalWaterHandler(-1)}}
                 />
             </View>
         )
