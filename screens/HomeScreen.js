@@ -5,6 +5,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import SleepModal from '../modals/SleepModal';
 import WaterModal from '../modals/WaterModal';
 import ExerciseModal from '../modals/ExerciseModal';
+import ProgressBar from 'react-native-progress/Bar';
+import styles from '../styles/HomeScreenStyles';
 
 import UpdateWater from '../services/UpdateWater';
 import * as firebase from 'firebase';
@@ -134,20 +136,45 @@ export default function HomeScreen() {
 
 
     return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <View style = {styles.container}>
                 <TouchableOpacity
+                    style = {styles.progressBarTop}
                     onPress = {() => setToggleWaterModal(true)}>
-                    <Text>Water: {curWater} / {goalWater}</Text>
+                    <ProgressBar progress={curWater/goalWater} 
+                                height = {100} 
+                                width = {400} 
+                                borderRadius = {30}
+                                borderColor = {`#556789`}
+                                color = {'blue'}
+                                unfilledColor = {'rgba(192, 192, 192, 0.4)'}
+                    />
+
                 </TouchableOpacity>
 
                 <TouchableOpacity
+                    style = {styles.progressBarMiddle}
                     onPress = {() => setToggleSleepModal(true)}>
-                    <Text>Sleep: {curSleep} / {goalSleep} </Text>
+                    <ProgressBar progress={curSleep/goalSleep} 
+                                height = {100} 
+                                width = {400} 
+                                borderRadius = {30}
+                                borderColor = {`#556789`}
+                                color = {`#192832`}
+                                unfilledColor = {'rgba(192, 192, 192, 0.6)'}
+                    />
                 </TouchableOpacity>
 
                 <TouchableOpacity
+                    style = {styles.progressBarBottom}
                     onPress = {() => setToggleExerciseModal(true)}>
-                    <Text>Exercise: {curExercise} / {goalExercise} </Text>
+                    <ProgressBar progress={curExercise/goalExercise} 
+                                height = {100} 
+                                width = {400} 
+                                borderRadius = {30}
+                                borderColor = {`#556789`}
+                                color = {`#AAAAAA`}
+                                unfilledColor = {'rgba(192, 192, 192, 0.4)'}
+                    />
                 </TouchableOpacity>
 
                 <WaterModal
