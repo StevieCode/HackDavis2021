@@ -17,6 +17,6 @@ export default StyleSheet.create({
         backgroundColor: "white",
         height: 40,
         borderColor: "grey",
-        width: 300,
+        width: "100%",
     }
 })

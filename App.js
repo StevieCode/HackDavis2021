@@ -4,7 +4,7 @@ import {Ionicons} from '@expo/vector-icons';
 
 // Bottom tabs
 import HomeScreen from './screens/HomeScreen.js';
-import LeaderBoardScreen from './screens/LeaderBoardScreen.js';
+import ProfileScreen from './screens/ProfileScreen.js';
 import SocialScreen from './screens/SocialScreen.js';
 
 import LoginScreen from './screens/LoginScreen';
@@ -25,16 +25,16 @@ const AppTabs = createBottomTabNavigator({
       tabBarIcon: ({tintColor}) => <Ionicons name="ios-home" size={24} color = {tintColor} />
     } 
   },
-  LeaderBoard: {
-    screen: LeaderBoardScreen,
-    navigationOptions: {
-      tabBarIcon: ({tintColor}) => <Ionicons name="ios-home" size={24} color = {tintColor} />      
-    }
-  },
   Social: {
     screen: SocialScreen,
     navigationOptions: {
-      tabBarIcon: ({tintColor}) => <Ionicons name="ios-home" size={24} color = {tintColor} />      
+      tabBarIcon: ({tintColor}) => <Ionicons name="globe-outline" size = {24} color = {tintColor}/>   
+    }
+  },
+  Profile: {
+    screen: ProfileScreen,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => <Ionicons name="person-circle-outline" size = {24} color = {tintColor}/>    
     }
   },
 });
