@@ -81,6 +81,7 @@ export default function SocialScreen() {
             <FriendModal 
                 visible = {friendModalToggle}
                 back = {() => setFriendModalToggle(false)}
+                addFriend = {() => addFriendHandler}
             />
             
            
