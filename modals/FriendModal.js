@@ -12,8 +12,7 @@ export default FriendModal = props => {
     };
 
     const addFriendHandler = () => {
-        console.log(friendMail)
-        AddFriend()
+        AddFriend(friendMail);
         setFriendMail('');
     }
     return (
