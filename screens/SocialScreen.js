@@ -164,7 +164,6 @@ export default function SocialScreen() {
             }  
 
             setFriends(friends);
-            console.log(friends);
             setLoading(false);
       });
 
