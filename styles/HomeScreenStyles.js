@@ -17,8 +17,8 @@ export default StyleSheet.create({
         marginTop: "2%",
     },
     barContainer: {
-        justifyContent: "center",
-        marginLeft: "-25%",
+        justifyContent: "flex-end",
+        marginLeft: "-24%",
     },
     everything: {
         flexDirection: "row", 

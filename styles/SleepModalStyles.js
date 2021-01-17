@@ -31,14 +31,14 @@ export default StyleSheet.create({
     curContainer: {
         fontSize: 20,
         alignSelf: "center",
-        marginLeft: "35%",
+        marginLeft: "18%",
         marginTop: "20%",
     },
     goalContainer: {
         fontSize: 20,
         alignSelf: "center",
-        marginLeft: "35%",
-        marginTop: "50%",
+        marginLeft: "18%",
+        marginTop: "40%",
     },
     waterText: {
         fontSize: 22,

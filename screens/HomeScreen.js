@@ -150,10 +150,10 @@ export default function HomeScreen() {
 
     return (
             <View style={styles.container}>
-
+                <Image source = {require("../images/title.png")} style = {{width: "75%", height: "45%", alignSelf: "auto", marginBottom: "-30%", marginTop: "-20%"}} />
                 <Image source = {require("../images/today.png")} style = {{width: "45%", height: "15%", alignSelf: "auto", }} />
                 <View style = {styles.everything}>
-                <Image source = {require("../images/three_elements.png")} style = {{width: "20%", height: "100%", alignSelf: "flex_start", zIndex: 5,}} />
+                <Image source = {require("../images/three_elements.png")} style = {{width: "20%", height: "100%", zIndex: 5, marginLeft: 15}} />
                     <View style = {styles.barContainer}>
                         <TouchableOpacity
                             onPress = {() => setToggleWaterModal(true)}>

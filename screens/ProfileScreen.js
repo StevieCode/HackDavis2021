@@ -24,7 +24,6 @@ export default function LeaderBoardScreen() {
         if (selectedImage !== null) {
             return (
                   <View style={styles.container}>
-                    <Text  style= {styles.header}>WHAT THE HEALTH</Text>
                     <TouchableHighlight style={[styles.profileImgContainer, { borderColor: 'white', borderWidth:3 }]}>
                         <Image source={{ uri: selectedImage.localUri }}style={styles.profileImg}/>
                         </TouchableHighlight>
@@ -42,7 +41,7 @@ export default function LeaderBoardScreen() {
     
     return ( 
         <View style = {styles.container}>
-            <Text  style= {styles.header}>WHAT THE HEALTH</Text>
+            <Image source = {require("../images/title.png")} style = {{width: "100%", height: "55%", alignSelf: "auto", marginBottom: "-30%", marginTop: "-10%"}} />
                 <Ionicons name="person-circle-outline" size={95} color="white" ></Ionicons>
                 <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
                     <View style= {styles.changeContainer}>

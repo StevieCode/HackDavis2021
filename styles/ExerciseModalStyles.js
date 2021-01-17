@@ -25,20 +25,21 @@ export default StyleSheet.create({
     curContainer: {
         fontSize: 20,
         alignSelf: "center",
-        marginLeft: "35%",
+        marginLeft: "20%",
         marginTop: "20%",
     },
     goalContainer: {
         fontSize: 20,
         alignSelf: "center",
-        marginLeft: "35%",
-        marginTop: "50%",
+        marginLeft: "20%",
+        marginTop: "45%",
     },
     waterText: {
         fontSize: 20,
         alignSelf: "center",
         color: "black",
         fontWeight: "500",
+        fontFamily: "Chalkboard SE",
     },
     backgroundImage: {
         flex: 1,
