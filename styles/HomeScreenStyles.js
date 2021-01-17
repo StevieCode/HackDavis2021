@@ -1,20 +1,27 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
     container: {
-        backgroundColor: `#556789`,
+        justifyContent: "center",
         flex: 1,
+        alignItems: "center",
+        backgroundColor: `#34457E`,
     },
-    progressBarTop: {
-        marginTop: "50%",
-        alignSelf: 'center',
+    topBar: {
+
     },
-    progressBarMiddle: {
-        marginTop: "10%",
-        alignSelf: "center",
+    midBar: {
+        marginTop: "2%",
     },
-    progressBarBottom: {
-        marginTop: "10%",
-        alignSelf: "center",
-    }
+    botBar: {
+        marginTop: "2%",
+    },
+    barContainer: {
+        justifyContent: "center",
+        marginLeft: "-25%",
+    },
+    everything: {
+        flexDirection: "row", 
+    },
+
 })

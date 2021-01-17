@@ -5,14 +5,18 @@ import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import * as firebase from 'firebase';
 import Fire from '../Fire';
 import FriendModal from '../modals/FriendModal'
+import { initialWindowMetrics } from 'react-native-safe-area-context';
 
 
-// Aim to store phone number -> for messaging someone
-// Stats -> to display stats on friends list
+// Level Water Sleep Excercise 
+
+
+
 export default function SocialScreen() {
 
-    const [loading, setLoading] = useState(true); // Set loading to true on component mount
-    const [friends, setFriends] = useState([]); // Initial empty array of users
+    const [loading, setLoading] = useState(true); 
+    const [friends, setFriends] = useState([]); 
+    const [friendInfo, setFriendInfo] = useState([]); //
 
     const [friendModalToggle, setFriendModalToggle] = useState(false);
 
@@ -23,27 +27,40 @@ export default function SocialScreen() {
         .doc(user.uid)
         .onSnapshot(queryDocumentSnapshot => {
             const friends = []
+            const friendInfo = []
             for (var i in queryDocumentSnapshot.get('friends')){
-                if (queryDocumentSnapshot.get('friends')[i] === true){
-                    friends.push(i);
+                friends.push(queryDocumentSnapshot.get('friends')[i])
+            }
+        setFriends(friends);
+        const all_users = firebase.firestore().collection('users').get()
+        .then(userSnapshot => {
+            userSnapshot.forEach(userDoc => {
+                // console.log('_______')
+                // console.log(['3', '4'].includes('3'))
+                // console.log(userDoc.data().uid);
+                // console.log(friends);
+                // console.log(friends.includes(userDoc.data().uid));
+                if (friends.includes(userDoc.data().uid)){
+                    friendInfo.push(userDoc.data())
                 }
-            }  
-            setFriends(friends);
-            setLoading(false);
-      });
-      // Unsubscribe from events when no longer in use
-      return () => subscriber();
-  }, []);
+            })
+        setFriendInfo(friendInfo);
+        })
+        })
+        setLoading(false);
+        
+    }, []);
+      
 
   if (loading) {
       return <ActivityIndicator />;
   }
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' , marginTop: 120, backgroundColor: "#556789"}}>
-            <FontAwesome5 name="user-friends" size={30} color="#556789" />
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' , marginTop: 120, backgroundColor: "#34457E"}}>
+            <FontAwesome5 name="user-friends" size={30} color="#34457E" />
             <View style={{flexDirection: 'row'}}>
-                <Text style={{  fontSize: 30, color: "#556789" }}>Friends List ({friends.length}) </Text> 
-                <Ionicons  name="person-add" size={24} color= "#556789" onPress = {() => setFriendModalToggle(true)}/>
+                <Text style={{  fontSize: 30, color: "#34457E" }}>Friends List ({friends.length}) </Text> 
+                <Ionicons  name="person-add" size={24} color= "#34457E" onPress = {() => setFriendModalToggle(true)}/>
 
 
             </View>
@@ -53,14 +70,22 @@ export default function SocialScreen() {
 
             <SafeAreaView>
                 <FlatList
-                    data={friends}
+                    data={friendInfo}
+                    //keyExtractor={(item, index) => item.key} // Need to revisit
                     renderItem={({item}) => (
                         <View style={styles.listItem}>
                             <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: "row" }}>
-                                <Text style={{ fontSize: 18, color: "#556789" }}> Friend: {item}</Text>
+
+                                {/* <Text style={{ fontSize: 12, color: "#556789" }}> Test: {'exercise' in item ? item.exercise[0]: '15'}</Text> */}
+                                <Text style={{ fontSize: 18, color: "#556789" }}> {item.firstName} {item.lastName}</Text>
+                                <Text style={{ fontSize: 12, color: "#556789" }}> Water: {'water' in item ? item.water[0]: '0'} / {'water' in item ? item.water[1]: '0'}  </Text>
+                                <Text style={{ fontSize: 12, color: "#556789" }}> Sleep: {'sleep' in item ? item.sleep[0]: '0'} / {'sleep' in item ? item.sleep[1]: '0'}  </Text>
+                                <Text style={{ fontSize: 12, color: "#556789" }}> Exercise: {'exercise' in item ? item.exercise[0]: '0'} / {'exercise' in item ? item.exercise[1]: '0'}  </Text>
+
                                 <View style={{flexDirection: 'row'}}>
+                                    {/* typeof item.water[0] === 'undefined */}
                                     <FontAwesome.Button onPress={() => SMS.sendSMSAsync(
-                                        ['6504779097'],
+                                        [item.phoneNumber],
                                         'Drink some more water!',)}
                                     style={{ backgroundColor: 'white', flexDirection: "row"}}>
                                         <Ionicons name="chatbubble-ellipses-outline" size={20} color="black" />
@@ -81,6 +106,7 @@ export default function SocialScreen() {
             <FriendModal 
                 visible = {friendModalToggle}
                 back = {() => setFriendModalToggle(false)}
+                addFriend = {() => addFriendHandler}
             />
             
            
@@ -106,7 +132,8 @@ const styles = StyleSheet.create({
       borderRadius: 50,
       alignItems: 'center',
       backgroundColor: 'white',
-      width: 400,
+      width: '100%',
+      flex: 1,
     },
     listItemText: {
       fontSize: 18

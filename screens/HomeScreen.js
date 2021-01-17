@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { render } from 'react-dom';
-import { ImagePropTypes, Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import SleepModal from '../modals/SleepModal';
 import WaterModal from '../modals/WaterModal';
 import ExerciseModal from '../modals/ExerciseModal';
+import styles from '../styles/HomeScreenStyles'
 import ProgressBar from 'react-native-progress/Bar';
-import styles from '../styles/HomeScreenStyles';
 
 import UpdateWater from '../services/UpdateWater';
 import * as firebase from 'firebase';
 import Fire from '../Fire';
 import UpdateExercise from '../services/UpdateExercise';
 import UpdateSleep from '../services/UpdateSleep';
+
 export default function HomeScreen() {
 
     const [curWater, setCurWater] = useState(0);
@@ -33,8 +34,8 @@ export default function HomeScreen() {
         const userRef = firebase.firestore().collection('users').doc(user.uid);
         if (toggleWaterModal === false){
             userRef.get().then(function(doc) {
-                setCurWater(doc.data().water[0])
-                setGoalWater(doc.data().water[1])
+                typeof doc.data().water[0] != undefined ? setCurWater(doc.data().water[0]) : setCurWater(0);
+                typeof doc.data().water[1] != undefined ? setGoalWater(doc.data().water[1]) : setGoalWater(0);
             });
         }
         if (toggleSleepModal === false){
@@ -134,48 +135,68 @@ export default function HomeScreen() {
         setGoalExercise(goalExercise + change)
     }
 
+    function GetPercentageWater() {
+        return goalWater === 0 ? 0 : curWater / goalWater
+    }
+
+    function GetPercentageSleep() {
+        return goalSleep === 0 ? 0 : curSleep / goalSleep
+    }
+
+    function GetPercentageExercise() {
+        return goalExercise === 0 ? 0 : curExercise / goalExercise
+    }
+
 
     return (
-            <View style = {styles.container}>
-                <TouchableOpacity
-                    style = {styles.progressBarTop}
-                    onPress = {() => setToggleWaterModal(true)}>
-                    <ProgressBar progress={curWater/goalWater} 
-                                height = {100} 
-                                width = {400} 
-                                borderRadius = {30}
-                                borderColor = {`#556789`}
-                                color = {'blue'}
-                                unfilledColor = {'rgba(192, 192, 192, 0.4)'}
-                    />
+            <View style={styles.container}>
 
-                </TouchableOpacity>
+                <Image source = {require("../images/today.png")} style = {{width: "45%", height: "15%", alignSelf: "auto", }} />
+                <View style = {styles.everything}>
+                <Image source = {require("../images/three_elements.png")} style = {{width: "20%", height: "100%", alignSelf: "flex_start", zIndex: 5,}} />
+                    <View style = {styles.barContainer}>
+                        <TouchableOpacity
+                            onPress = {() => setToggleWaterModal(true)}>
+                            <ProgressBar
+                                progress = {GetPercentageWater()}
+                                height = {120}
+                                width = {360}
+                                borderRadius = {40}
+                                borderColor = {`#34457E`}
+                                color = {`#7A8DCC`}
+                                unfilledColor = {`#3D539C`}
+                            />
+                        </TouchableOpacity>
 
-                <TouchableOpacity
-                    style = {styles.progressBarMiddle}
-                    onPress = {() => setToggleSleepModal(true)}>
-                    <ProgressBar progress={curSleep/goalSleep} 
-                                height = {100} 
-                                width = {400} 
-                                borderRadius = {30}
-                                borderColor = {`#556789`}
-                                color = {`#192832`}
-                                unfilledColor = {'rgba(192, 192, 192, 0.6)'}
-                    />
-                </TouchableOpacity>
+                        <TouchableOpacity
+                            style = {styles.midBar}
+                            onPress = {() => setToggleSleepModal(true)}>
+                            <ProgressBar
+                                progress = {GetPercentageSleep()}
+                                height = {120}
+                                width = {360}
+                                borderRadius = {40}
+                                borderColor = {`#34457E`}
+                                color = {`#7A8DCC`}
+                                unfilledColor = {`#3D539C`}
+                            />
+                        </TouchableOpacity>
 
-                <TouchableOpacity
-                    style = {styles.progressBarBottom}
-                    onPress = {() => setToggleExerciseModal(true)}>
-                    <ProgressBar progress={curExercise/goalExercise} 
-                                height = {100} 
-                                width = {400} 
-                                borderRadius = {30}
-                                borderColor = {`#556789`}
-                                color = {`#AAAAAA`}
-                                unfilledColor = {'rgba(192, 192, 192, 0.4)'}
-                    />
-                </TouchableOpacity>
+                        <TouchableOpacity
+                            style = {styles.botBar}
+                            onPress = {() => setToggleExerciseModal(true)}>
+                            <ProgressBar
+                                progress = {GetPercentageExercise()}
+                                height = {120}
+                                width = {360}
+                                borderRadius = {40}
+                                borderColor = {`#34457E`}
+                                color = {`#7A8DCC`}
+                                unfilledColor = {`#3D539C`}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                </View>
 
                 <WaterModal
                     visible = {toggleWaterModal}
