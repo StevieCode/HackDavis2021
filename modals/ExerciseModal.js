@@ -16,7 +16,7 @@ export default ExerciseModal = props => {
                     </TouchableOpacity>
                 </View>
 
-                <ImageBackground source = {require("../images/sleep_background.png")} style = {styles.backgroundImage}>
+                <ImageBackground source = {require("../images/exercise_background.png")} style = {styles.backgroundImage}>
 
                     {/* Goal Water */}
                     <View style = {styles.goalContainer}>
@@ -26,7 +26,7 @@ export default ExerciseModal = props => {
                             <Image source = {require("../images/up_arrow.png")} style = {styles.arrow}></Image>
                         </TouchableOpacity>
 
-                        <Text style = {styles.waterText}>Goal: {props.goalExercise} hours</Text>
+                        <Text style = {styles.waterText}>Goal: {props.goalExercise} minutes</Text>
 
                         <TouchableOpacity
                             onPress = {props.minusGoalExercise}
@@ -43,7 +43,7 @@ export default ExerciseModal = props => {
                             <Image source = {require("../images/up_arrow.png")} style = {styles.arrow}></Image>
                         </TouchableOpacity>
 
-                        <Text style = {styles.waterText}>   Current: {props.curExercise} hours</Text>
+                        <Text style = {styles.waterText}>   Current: {props.curExercise} minutes</Text>
 
                         <TouchableOpacity
                             onPress = {props.minusCurExercise}

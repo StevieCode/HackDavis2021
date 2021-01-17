@@ -131,10 +131,10 @@ export default function HomeScreen() {
                     ok = {() => setToggleExerciseModal(false)}
                     curExercise = {curExercise}
                     goalExercise = {goalExercise}
-                    addCurExercise = {() => CurExerciseHandler(1)}
-                    minusCurExercise = {() => CurExerciseHandler(-1)}
-                    addGoalExercise = {() => GoalExerciseHandler(1)}
-                    minusGoalExercise = {() => GoalExerciseHandler(-1)}
+                    addCurExercise = {() => CurExerciseHandler(10)}
+                    minusCurExercise = {() => CurExerciseHandler(-10)}
+                    addGoalExercise = {() => GoalExerciseHandler(10)}
+                    minusGoalExercise = {() => GoalExerciseHandler(-10)}
                 />
 
             </View>
