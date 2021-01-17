@@ -1,22 +1,62 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
+import styles from '../styles/ProfileScreenStyles';
+import { Ionicons } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
 
 export default function LeaderBoardScreen() {
-    return (
-        
-        <View style={{ flex: 1, alignItems: 'center' , marginTop: 85, backgroundColor: "#556789"}}>
-            <View><Text  style={{ fontSize: 25, color: "white" }}>WHAT THE HEALTH</Text></View>
-            <Text style={{ fontSize: 18, color: 'white' }}> </Text> 
-            <Text style={{ fontSize: 18, color: 'white' }}> </Text>
-            <Text style={{ fontSize: 18, color: 'white' }}> </Text> 
-            <Text style={{ fontSize: 18, color: 'white' }}> </Text>
-            <Ionicons name="person-circle-outline"  size={95} color="white" ></Ionicons>
-            <Text  style={{ fontSize: 25, color: 'white' }}>John Doe</Text>
-            <Text style={{ fontSize: 18, color: 'white' }}> </Text> 
-            <Text style={{ fontSize: 18, color: 'white' }}> </Text> 
-            <Text  style={{ fontSize: 15, color: 'white' }}>1(650)223-2932</Text>
-            <Text  style={{ fontSize: 15, color: 'white' }}>JohnDoe22@gmail.com</Text>
+    const [selectedImage, setSelectedImage] = React.useState(null);
+
+    let openImagePickerAsync = async () => {
+        let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (permissionResult.granted === false) {
+          alert("Permission to access camera roll is required!");
+          return;
+        }
+        let pickerResult = await ImagePicker.launchImageLibraryAsync();
+        console.log(pickerResult);
+        if (pickerResult.cancelled === true) {
+            return;
+          }
+        setSelectedImage({ localUri: pickerResult.uri });
+        };
+
+        if (selectedImage !== null) {
+            return (
+              <View style={styles.container}>
+                  <Text  style= {styles.header}>WHAT THE HEALTH</Text>
+                    <View style={{flexDirection: 'row'}}>
+                        <Image
+                        source={{ uri: selectedImage.localUri }}
+                        style={styles.thumbnail}
+                        />
+                         <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
+                            <View style= {styles.changeContainer}>
+                                <Ionicons name="create-outline" size={20} color="white" />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <Text  style= {styles.fullName}> John Doe</Text>
+                    <Text  style= {styles.regText}> 1(650)223-2932</Text>
+                    <Text  style= {styles.regText}> JohnDoe22@gmail.com</Text>
+              </View>
+            );
+      }
+    
+    return ( 
+        <View style = {styles.container}>
+            <Text  style= {styles.header}>WHAT THE HEALTH</Text>
+            <View style={{flexDirection: 'row'}}>
+                <Ionicons name="person-circle-outline" size={95} color="white" ></Ionicons>
+                <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
+                    <View style= {styles.changeContainer}>
+                        <Ionicons name="create-outline" size={20} color="white" />
+                    </View>
+                </TouchableOpacity>
+            </View>
+            <Text  style= {styles.fullName}> John Doe</Text>
+            <Text  style= {styles.regText}> 1(650)223-2932</Text>
+            <Text  style= {styles.regText}> JohnDoe22@gmail.com</Text>
         </View>
     )
 }
