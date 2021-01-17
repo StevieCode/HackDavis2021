@@ -20,15 +20,25 @@ export default WaterModal = props => {
                     </TouchableOpacity>
                 </View>
 
-                <View style = {styles.inputContainer}>
-                    <TextInput 
-                        autoFocus = {true} 
-                        multiline = {true} 
-                        numberOfLines = {4} 
-                        sytle = {{flex: 1}} 
-                        placeholder = "Caption...">
-                    </TextInput>
-                </View>
+                <Text style = {styles.title}>Water Intake</Text>
+
+                <Text style = {styles.goal}>Goal: {props.goalWater} cups/day</Text>
+
+                <Text style = {styles.current}>Current: {props.curWater} cups</Text>
+
+                <TouchableOpacity
+                    onPress = {props.addCurWater}
+                >
+                    <Text style = {styles.updateCurButton}>Add Cur Water</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress = {props.minusCurWater}
+                >
+                    <Text style = {styles.updateCurButton}>Minus Cur Water</Text>
+                </TouchableOpacity>
+
+
 
 
             </SafeAreaView>

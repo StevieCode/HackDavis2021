@@ -16,4 +16,30 @@ export default StyleSheet.create({
         margin: 32,
         flexDirection: "row",
     },
+    title: {
+        alignSelf: "center",
+        fontWeight: "500",
+        fontSize: 30,
+        marginTop: 80,
+    },
+    goal: {
+        alignSelf: "center",
+        fontSize: 20,
+        marginTop: 20,
+    },
+    current: {
+        alignSelf: "center",
+        fontSize: 20,
+        marginTop: 20,
+    },
+    updateCurButton: {
+        alignSelf: "center",
+        fontSize: 20,
+        marginTop: 20,
+    },
+    updateGoalButton: {
+        alignSelf: "center",
+        fontSize: 20,
+        marginTop: 20,
+    }
 })
