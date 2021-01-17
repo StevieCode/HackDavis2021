@@ -195,7 +195,7 @@ export default function SocialScreen() {
 
     return (
 
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' , marginTop: 150, backgroundColor: "#3b5998"}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' , marginTop: 120, backgroundColor: "#3b5998"}}>
         <FontAwesome5 name="user-friends" size={30} color="black" />
         <Text style={{ fontSize: 30, color: 'black' }}>Friends List ({friends.length}) </Text>  
         
@@ -208,8 +208,16 @@ export default function SocialScreen() {
             <FlatList
                 data={friends}
                 renderItem={({item}) => (
-                    <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: "row" }}>
                         <Text>Friend: {item}</Text>
+                        <View style={{flexDirection: 'row'}}>
+                            <FontAwesome.Button onPress={() => SMS.sendSMSAsync(
+                                ['6504779097'],
+                                'DRINK UPPP BUDDDDDDDDDDDDDDDDDDY',)}
+                            style={{ backgroundColor: '#3b5998', flexDirection: "row"}}>
+                                <Ionicons name="chatbubble-ellipses-outline" size={20} color="black" />
+                            </FontAwesome.Button>
+                         </View>
                     </View>
                 )}
             />

@@ -11,6 +11,7 @@ export default function RegisterUser(firstName, lastName, phoneNumber, email, pa
                     firstName: firstName,
                     lastName: lastName,
                     phoneNumber: phoneNumber, 
+                    friends: {},
                 })
     })
 }
