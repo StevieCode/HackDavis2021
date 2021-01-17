@@ -6,6 +6,7 @@ import SleepModal from '../modals/SleepModal';
 import WaterModal from '../modals/WaterModal';
 import ExerciseModal from '../modals/ExerciseModal';
 import styles from '../styles/HomeScreenStyles'
+import ProgressBar from 'react-native-progress/Bar';
 
 import UpdateWater from '../services/UpdateWater';
 import * as firebase from 'firebase';
@@ -134,22 +135,60 @@ export default function HomeScreen() {
         setGoalExercise(goalExercise + change)
     }
 
+    function GetPercentageWater() {
+        return goalWater === 0 ? 0 : curWater / goalWater
+    }
+
+    function GetPercentageSleep() {
+        return goalSleep === 0 ? 0 : curSleep / goalSleep
+    }
+
+    function GetPercentageExercise() {
+        return goalExercise === 0 ? 0 : curExercise / goalExercise
+    }
+
 
     return (
             <View style={styles.container}>
                 <TouchableOpacity
                     onPress = {() => setToggleWaterModal(true)}>
-                    <Text>Water: {curWater} / {goalWater}</Text>
+                    <ProgressBar
+                        progress = {GetPercentageWater()}
+                        height = {120}
+                        width = {360}
+                        borderRadius = {40}
+                        borderColor = {`#34457E`}
+                        color = {`#7A8DCC`}
+                        unfilledColor = {`#3D539C`}
+                    />
                 </TouchableOpacity>
 
                 <TouchableOpacity
+                    style = {styles.midBar}
                     onPress = {() => setToggleSleepModal(true)}>
-                    <Text>Sleep: {curSleep} / {goalSleep} </Text>
+                    <ProgressBar
+                        progress = {GetPercentageSleep()}
+                        height = {120}
+                        width = {360}
+                        borderRadius = {40}
+                        borderColor = {`#34457E`}
+                        color = {`#7A8DCC`}
+                        unfilledColor = {`#3D539C`}
+                    />
                 </TouchableOpacity>
 
                 <TouchableOpacity
+                    style = {styles.botBar}
                     onPress = {() => setToggleExerciseModal(true)}>
-                    <Text>Exercise: {curExercise} / {goalExercise} </Text>
+                    <ProgressBar
+                        progress = {GetPercentageExercise()}
+                        height = {120}
+                        width = {360}
+                        borderRadius = {40}
+                        borderColor = {`#34457E`}
+                        color = {`#7A8DCC`}
+                        unfilledColor = {`#3D539C`}
+                    />
                 </TouchableOpacity>
 
                 <WaterModal

@@ -5,6 +5,15 @@ export default StyleSheet.create({
         justifyContent: "center",
         flex: 1,
         alignItems: "center",
-        backgroundColor: `#556789`,
+        backgroundColor: `#34457E`,
+    },
+    topBar: {
+
+    },
+    midBar: {
+        marginTop: "2%",
+    },
+    botBar: {
+        marginTop: "2%",
     },
 })

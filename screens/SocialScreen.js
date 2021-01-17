@@ -39,11 +39,11 @@ export default function SocialScreen() {
       return <ActivityIndicator />;
   }
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' , marginTop: 120, backgroundColor: "#556789"}}>
-            <FontAwesome5 name="user-friends" size={30} color="#556789" />
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' , marginTop: 120, backgroundColor: "#34457E"}}>
+            <FontAwesome5 name="user-friends" size={30} color="#34457E" />
             <View style={{flexDirection: 'row'}}>
-                <Text style={{  fontSize: 30, color: "#556789" }}>Friends List ({friends.length}) </Text> 
-                <Ionicons  name="person-add" size={24} color= "#556789" onPress = {() => setFriendModalToggle(true)}/>
+                <Text style={{  fontSize: 30, color: "#34457E" }}>Friends List ({friends.length}) </Text> 
+                <Ionicons  name="person-add" size={24} color= "#34457E" onPress = {() => setFriendModalToggle(true)}/>
 
 
             </View>
@@ -57,7 +57,7 @@ export default function SocialScreen() {
                     renderItem={({item}) => (
                         <View style={styles.listItem}>
                             <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: "row" }}>
-                                <Text style={{ fontSize: 18, color: "#556789" }}> Friend: {item}</Text>
+                                <Text style={{ fontSize: 18, color: "#34457E" }}> Friend: {item}</Text>
                                 <View style={{flexDirection: 'row'}}>
                                     <FontAwesome.Button onPress={() => SMS.sendSMSAsync(
                                         ['6504779097'],
