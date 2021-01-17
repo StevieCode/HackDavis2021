@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { render } from 'react-dom';
 import { ImagePropTypes, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -6,12 +6,17 @@ import SleepModal from '../modals/SleepModal';
 import WaterModal from '../modals/WaterModal';
 import ExerciseModal from '../modals/ExerciseModal';
 
+import UpdateWater from '../services/UpdateWater';
+import * as firebase from 'firebase';
+import Fire from '../Fire';
+import UpdateExercise from '../services/UpdateExercise';
+import UpdateSleep from '../services/UpdateSleep';
 export default function HomeScreen() {
 
     const [curWater, setCurWater] = useState(0);
     const [goalWater, setGoalWater] = useState(0);
     const [toggleWaterModal, setToggleWaterModal] = useState(false);
-
+     
     const [curSleep, setCurSleep] = useState(0);
     const [goalSleep, setGoalSleep] = useState(0);
     const [toggleSleepModal, setToggleSleepModal] = useState(false);
@@ -19,6 +24,47 @@ export default function HomeScreen() {
     const [curExercise, setCurExercise] = useState(0);
     const [goalExercise, setGoalExercise] = useState(0);
     const [toggleExerciseModal, setToggleExerciseModal] = useState(false);
+
+    
+    useEffect(() => {
+        const user = firebase.auth().currentUser;
+        const userRef = firebase.firestore().collection('users').doc(user.uid);
+        if (toggleWaterModal === false){
+            userRef.get().then(function(doc) {
+                setCurWater(doc.data().water[0])
+                setGoalWater(doc.data().water[1])
+            });
+        }
+        if (toggleSleepModal === false){
+            userRef.get().then(function(doc) {
+                setCurSleep(doc.data().sleep[0])
+                setGoalSleep(doc.data().sleep[1])
+            });
+        }
+        if (toggleExerciseModal === false){
+            userRef.get().then(function(doc) {
+                setCurExercise(doc.data().exercise[0])
+                setGoalExercise(doc.data().exercise[1])
+            });
+        }
+
+
+    });
+  
+    function closeWaterHandler(curWater, goalWater){
+        UpdateWater(curWater, goalWater);
+        setToggleWaterModal(false);
+    }
+
+    function closeExerciseHandler(curExercise, goalExercise){
+        UpdateExercise(curExercise, goalExercise);
+        setToggleExerciseModal(false);
+    }
+
+    function closeSleepHandler(curSleep, goalSleep){
+        UpdateSleep(curSleep, goalSleep);
+        setToggleSleepModal(false);
+    }
 
     function CurWaterHandler(change) {
         if (curWater <= 0 && change < 0) {
@@ -91,24 +137,24 @@ export default function HomeScreen() {
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <TouchableOpacity
                     onPress = {() => setToggleWaterModal(true)}>
-                    <Text>Water: {curWater}</Text>
+                    <Text>Water: {curWater} / {goalWater}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     onPress = {() => setToggleSleepModal(true)}>
-                    <Text>Sleep</Text>
+                    <Text>Sleep: {curSleep} / {goalSleep} </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     onPress = {() => setToggleExerciseModal(true)}>
-                    <Text>Exercise</Text>
+                    <Text>Exercise: {curExercise} / {goalExercise} </Text>
                 </TouchableOpacity>
 
                 <WaterModal
                     visible = {toggleWaterModal}
-                    ok = {() => setToggleWaterModal(false)}
                     curWater = {curWater}
                     goalWater = {goalWater}
+                    closeWater = {() => {closeWaterHandler(curWater, goalWater)}}
                     addCurWater = {() => {CurWaterHandler(1)}}
                     minusCurWater = {() => {CurWaterHandler(-1)}}
                     addGoalWater = {() => {GoalWaterHandler(1)}}
@@ -117,7 +163,7 @@ export default function HomeScreen() {
 
                 <SleepModal
                     visible = {toggleSleepModal}
-                    ok = {() => setToggleSleepModal(false)}
+                    closeSleep = {() => closeSleepHandler(curSleep, goalSleep)}
                     curSleep = {curSleep}
                     goalSleep = {goalSleep}
                     addCurSleep = {() => {CurSleepHandler(1)}}
@@ -128,7 +174,7 @@ export default function HomeScreen() {
 
                 <ExerciseModal
                     visible = {toggleExerciseModal}
-                    ok = {() => setToggleExerciseModal(false)}
+                    closeExercise = {() => closeExerciseHandler(curExercise, goalExercise)}
                     curExercise = {curExercise}
                     goalExercise = {goalExercise}
                     addCurExercise = {() => CurExerciseHandler(10)}

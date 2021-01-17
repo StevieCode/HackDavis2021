@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, ImageBackground, Modal, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import styles from '../styles/WaterModalStyles';
+import styles from '../styles/ExerciseModalStyles';
 
 export default ExerciseModal = props => {
     
@@ -11,7 +11,7 @@ export default ExerciseModal = props => {
             <SafeAreaView style = {styles.container}>
                 {/* Top bar */}
                 <View style = {styles.header}>
-                    <TouchableOpacity onPress = {props.ok}>
+                    <TouchableOpacity onPress = {props.closeExercise}>
                         <Text style = {{fontWeight: "500", color: "white", fontSize: 22}}>Ok</Text>
                     </TouchableOpacity>
                 </View>

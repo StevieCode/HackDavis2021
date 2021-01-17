@@ -4,7 +4,7 @@ import * as SMS from 'expo-sms';
 import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import * as firebase from 'firebase';
 import Fire from '../Fire';
-
+import FriendModal from '../modals/FriendModal'
 
 
 // Aim to store phone number -> for messaging someone
@@ -13,6 +13,8 @@ export default function SocialScreen() {
 
     const [loading, setLoading] = useState(true); // Set loading to true on component mount
     const [friends, setFriends] = useState([]); // Initial empty array of users
+
+    const [friendModalToggle, setFriendModalToggle] = useState(false);
 
     useEffect(() => {
         const user = firebase.auth().currentUser
@@ -27,7 +29,6 @@ export default function SocialScreen() {
                 }
             }  
             setFriends(friends);
-            console.log(friends);
             setLoading(false);
       });
       // Unsubscribe from events when no longer in use
@@ -43,6 +44,8 @@ export default function SocialScreen() {
             <View style={{flexDirection: 'row'}}>
                 <Text style={{  fontSize: 30, color: "#556789" }}>Friends List ({friends.length}) </Text> 
                 <Ionicons  name="person-add" size={24} color= "#556789" />
+
+
             </View>
             <Text style={{ fontSize: 18, color: 'white' }}> </Text> 
             <Text style={{ fontSize: 18, color: 'white' }}>Remind your friends to stay healthy!</Text>
@@ -63,11 +66,24 @@ export default function SocialScreen() {
                                         <Ionicons name="chatbubble-ellipses-outline" size={20} color="black" />
                                     </FontAwesome.Button>
                                 </View> 
+
                             </View>
+
+                            
                         </View>
+
                     )}
                 />
+
+           
             </SafeAreaView>
+
+            <FriendModal 
+                visible = {friendModalToggle}
+                back = {() => setFriendModalToggle(false)}
+            />
+            
+           
         </View>
     );
 };
