@@ -4,6 +4,7 @@ import { ImagePropTypes, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import SleepModal from '../modals/SleepModal';
 import WaterModal from '../modals/WaterModal';
+import ExerciseModal from '../modals/ExerciseModal';
 
 export default function HomeScreen() {
 
@@ -14,6 +15,10 @@ export default function HomeScreen() {
     const [curSleep, setCurSleep] = useState(0);
     const [goalSleep, setGoalSleep] = useState(0);
     const [toggleSleepModal, setToggleSleepModal] = useState(false);
+
+    const [curExercise, setCurExercise] = useState(0);
+    const [goalExercise, setGoalExercise] = useState(0);
+    const [toggleExerciseModal, setToggleExerciseModal] = useState(false);
 
     function CurWaterHandler(change) {
         if (curWater <= 0 && change < 0) {
@@ -59,6 +64,28 @@ export default function HomeScreen() {
         setGoalSleep(goalSleep + change)
     }
 
+    function CurExerciseHandler(change) {
+        if (curExercise <= 0 && change < 0) {
+            console.log("Can't have less");
+            return
+        } else if (curExercise > goalExercise) {
+            console.log("Too much exercise");
+        }
+
+        setCurExercise(curExercise + change);
+    }
+
+    function GoalExerciseHandler(change) {
+        if (goalExercise <= 0 && change < 0) {
+            console.log("Can't have less");
+            return
+        } else if (curExercise > goalExercise) {
+            console.log("Too little exercise")
+        }
+
+        setGoalExercise(goalExercise + change)
+    }
+
 
     return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -73,7 +100,7 @@ export default function HomeScreen() {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                >
+                    onPress = {() => setToggleExerciseModal(true)}>
                     <Text>Exercise</Text>
                 </TouchableOpacity>
 
@@ -97,6 +124,17 @@ export default function HomeScreen() {
                     minusCurSleep = {() => {CurSleepHandler(-1)}}
                     addGoalSleep= {() => {GoalSleepHandler(1)}}
                     minusGoalSleep = {() => {GoalSleepHandler(-1)}}
+                />
+
+                <ExerciseModal
+                    visible = {toggleExerciseModal}
+                    ok = {() => setToggleExerciseModal(false)}
+                    curExercise = {curExercise}
+                    goalExercise = {goalExercise}
+                    addCurExercise = {() => CurExerciseHandler(1)}
+                    minusCurExercise = {() => CurExerciseHandler(-1)}
+                    addGoalExercise = {() => GoalExerciseHandler(1)}
+                    minusGoalExercise = {() => GoalExerciseHandler(-1)}
                 />
 
             </View>
