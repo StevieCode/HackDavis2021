@@ -34,8 +34,8 @@ export default function HomeScreen() {
         const userRef = firebase.firestore().collection('users').doc(user.uid);
         if (toggleWaterModal === false){
             userRef.get().then(function(doc) {
-                setCurWater(doc.data().water[0])
-                setGoalWater(doc.data().water[1])
+                typeof doc.data().water[0] != undefined ? setCurWater(doc.data().water[0]) : setCurWater(0);
+                typeof doc.data().water[1] != undefined ? setGoalWater(doc.data().water[1]) : setGoalWater(0);
             });
         }
         if (toggleSleepModal === false){
