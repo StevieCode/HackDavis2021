@@ -40,12 +40,29 @@ export default StyleSheet.create({
         fontSize: 20,
         alignSelf: "center",
         marginLeft: 0,
-        marginTop: 50,  
+        marginTop: 20,  
     },
     thumbnail: {
-        width: "100%",
-        height: "50%",
+        width: "120%",
+        height: "35%",
         resizeMode: "contain",
+        borderTopRightRadius: 20,
+        borderBottomRightRadius: 20,
+        overlayColor: "#556789"
+    },
+
+    profileImg: {
+        height: 120,
+        width: 120,
+        borderRadius: 60,
+    },
+
+    profileImgContainer: {
+        marginLeft: 0,
+        height: 120,
+        width: 120,
+        borderRadius: 60,
+        overflow: 'hidden',
     },
 
 

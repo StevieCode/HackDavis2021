@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image, TouchableHighlight } from 'react-native';
 import styles from '../styles/ProfileScreenStyles';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
@@ -25,17 +25,14 @@ export default function LeaderBoardScreen() {
             return (
               <View style={styles.container}>
                   <Text  style= {styles.header}>WHAT THE HEALTH</Text>
-                    <View style={{flexDirection: 'row'}}>
-                        <Image
-                        source={{ uri: selectedImage.localUri }}
-                        style={styles.thumbnail}
-                        />
+                  <TouchableHighlight style={[styles.profileImgContainer, { borderColor: 'white', borderWidth:3 }]}>
+                    <Image source={{ uri: selectedImage.localUri }}style={styles.profileImg}/>
+                    </TouchableHighlight>
                          <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
-                            <View style= {styles.changeContainer}>
+                            <View style= {styles.altChangeContainer}>
                                 <Ionicons name="create-outline" size={20} color="white" />
                             </View>
                         </TouchableOpacity>
-                    </View>
                     <Text  style= {styles.fullName}> John Doe</Text>
                     <Text  style= {styles.regText}> 1(650)223-2932</Text>
                     <Text  style= {styles.regText}> JohnDoe22@gmail.com</Text>
@@ -46,14 +43,12 @@ export default function LeaderBoardScreen() {
     return ( 
         <View style = {styles.container}>
             <Text  style= {styles.header}>WHAT THE HEALTH</Text>
-            <View style={{flexDirection: 'row'}}>
                 <Ionicons name="person-circle-outline" size={95} color="white" ></Ionicons>
                 <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
                     <View style= {styles.changeContainer}>
                         <Ionicons name="create-outline" size={20} color="white" />
                     </View>
                 </TouchableOpacity>
-            </View>
             <Text  style= {styles.fullName}> John Doe</Text>
             <Text  style= {styles.regText}> 1(650)223-2932</Text>
             <Text  style= {styles.regText}> JohnDoe22@gmail.com</Text>
