@@ -9,7 +9,8 @@ import ExerciseModal from '../modals/ExerciseModal';
 import UpdateWater from '../services/UpdateWater';
 import * as firebase from 'firebase';
 import Fire from '../Fire';
-
+import UpdateExercise from '../services/UpdateExercise';
+import UpdateSleep from '../services/UpdateSleep';
 export default function HomeScreen() {
 
     const [curWater, setCurWater] = useState(0);
@@ -24,10 +25,6 @@ export default function HomeScreen() {
     const [goalExercise, setGoalExercise] = useState(0);
     const [toggleExerciseModal, setToggleExerciseModal] = useState(false);
 
-    function closeWater(curWater, goalWater){
-        UpdateWater(curWater, goalWater);
-        setToggleWaterModal(false);
-    }
     
     useEffect(() => {
         const user = firebase.auth().currentUser;
@@ -36,14 +33,38 @@ export default function HomeScreen() {
             userRef.get().then(function(doc) {
                 setCurWater(doc.data().water[0])
                 setGoalWater(doc.data().water[1])
-                console.log(doc.data().water);
             });
-
         }
+        if (toggleSleepModal === false){
+            userRef.get().then(function(doc) {
+                setCurSleep(doc.data().sleep[0])
+                setGoalSleep(doc.data().sleep[1])
+            });
+        }
+        if (toggleExerciseModal === false){
+            userRef.get().then(function(doc) {
+                setCurExercise(doc.data().exercise[0])
+                setGoalExercise(doc.data().exercise[1])
+            });
+        }
+
 
     });
   
+    function closeWaterHandler(curWater, goalWater){
+        UpdateWater(curWater, goalWater);
+        setToggleWaterModal(false);
+    }
 
+    function closeExerciseHandler(curExercise, goalExercise){
+        UpdateExercise(curExercise, goalExercise);
+        setToggleExerciseModal(false);
+    }
+
+    function closeSleepHandler(curSleep, goalSleep){
+        UpdateSleep(curSleep, goalSleep);
+        setToggleSleepModal(false);
+    }
 
     function CurWaterHandler(change) {
         if (curWater <= 0 && change < 0) {
@@ -121,19 +142,19 @@ export default function HomeScreen() {
 
                 <TouchableOpacity
                     onPress = {() => setToggleSleepModal(true)}>
-                    <Text>Sleep</Text>
+                    <Text>Sleep: {curSleep} / {goalSleep} </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     onPress = {() => setToggleExerciseModal(true)}>
-                    <Text>Exercise</Text>
+                    <Text>Exercise: {curExercise} / {goalExercise} </Text>
                 </TouchableOpacity>
 
                 <WaterModal
                     visible = {toggleWaterModal}
                     curWater = {curWater}
                     goalWater = {goalWater}
-                    ok = {() => {closeWater(curWater, goalWater)}}
+                    closeWater = {() => {closeWaterHandler(curWater, goalWater)}}
                     addCurWater = {() => {CurWaterHandler(1)}}
                     minusCurWater = {() => {CurWaterHandler(-1)}}
                     addGoalWater = {() => {GoalWaterHandler(1)}}
@@ -142,7 +163,7 @@ export default function HomeScreen() {
 
                 <SleepModal
                     visible = {toggleSleepModal}
-                    ok = {() => setToggleSleepModal(false)}
+                    closeSleep = {() => closeSleepHandler(curSleep, goalSleep)}
                     curSleep = {curSleep}
                     goalSleep = {goalSleep}
                     addCurSleep = {() => {CurSleepHandler(1)}}
@@ -153,7 +174,7 @@ export default function HomeScreen() {
 
                 <ExerciseModal
                     visible = {toggleExerciseModal}
-                    ok = {() => setToggleExerciseModal(false)}
+                    closeExercise = {() => closeExerciseHandler(curExercise, goalExercise)}
                     curExercise = {curExercise}
                     goalExercise = {goalExercise}
                     addCurExercise = {() => CurExerciseHandler(10)}

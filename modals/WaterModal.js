@@ -15,7 +15,7 @@ export default WaterModal = props => {
             <SafeAreaView style = {styles.container}>
                 {/* Top bar */}
                 <View style = {styles.header}>
-                    <TouchableOpacity onPress = {props.ok}>
+                    <TouchableOpacity onPress = {props.closeWater}>
                         <Text style = {{fontWeight: "500", color: "white", fontSize: 22}}>Ok</Text>
                     </TouchableOpacity>
                 </View>
