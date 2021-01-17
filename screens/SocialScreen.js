@@ -43,7 +43,7 @@ export default function SocialScreen() {
             <FontAwesome5 name="user-friends" size={30} color="#556789" />
             <View style={{flexDirection: 'row'}}>
                 <Text style={{  fontSize: 30, color: "#556789" }}>Friends List ({friends.length}) </Text> 
-                <Ionicons  name="person-add" size={24} color= "#556789" />
+                <Ionicons  name="person-add" size={24} color= "#556789" onPress = {() => setFriendModalToggle(true)}/>
 
 
             </View>
