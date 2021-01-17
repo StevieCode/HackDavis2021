@@ -7,8 +7,10 @@ import Fire from '../Fire';
 import FriendModal from '../modals/FriendModal'
 
 
-// Aim to store phone number -> for messaging someone
-// Stats -> to display stats on friends list
+// Level Water Sleep Excercise 
+
+
+
 export default function SocialScreen() {
 
     const [loading, setLoading] = useState(true); // Set loading to true on component mount
@@ -106,7 +108,8 @@ const styles = StyleSheet.create({
       borderRadius: 50,
       alignItems: 'center',
       backgroundColor: 'white',
-      width: 400,
+      width: '100%',
+      flex: 1,
     },
     listItemText: {
       fontSize: 18
