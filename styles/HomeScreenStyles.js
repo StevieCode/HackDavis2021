@@ -16,4 +16,12 @@ export default StyleSheet.create({
     botBar: {
         marginTop: "2%",
     },
+    barContainer: {
+        justifyContent: "center",
+        marginLeft: "-25%",
+    },
+    everything: {
+        flexDirection: "row", 
+    },
+
 })

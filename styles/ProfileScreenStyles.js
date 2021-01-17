@@ -14,7 +14,8 @@ export default StyleSheet.create({
         paddingVertical: 12,
         borderBottomWidth: 50,
         color: "white",
-        fontSize: 32.
+        fontSize: 32,
+        fontFamily: "Chalkboard SE",
     },
     header2: {
         flexDirection: "row",
@@ -23,13 +24,15 @@ export default StyleSheet.create({
         paddingVertical: 12,
         borderBottomWidth: 50,
         color: "blue",
-        fontSize: 32.
+        fontSize: 32,
+        fontFamily: "Chalkboard SE"
     },
     regText: {
         margin: 8,
         flexDirection: "row",
         fontSize: 15, 
         color: 'white',
+        fontFamily: "Chalkboard SE",
     },
     fullName: {
         alignSelf: "center",
@@ -38,6 +41,7 @@ export default StyleSheet.create({
         marginTop: 0,
         margin: 8,
         color: 'white',
+        fontFamily: "Chalkboard SE",
     },
     changeContainer: {
         fontSize: 20,

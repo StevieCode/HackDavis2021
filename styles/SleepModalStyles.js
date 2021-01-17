@@ -41,10 +41,11 @@ export default StyleSheet.create({
         marginTop: "50%",
     },
     waterText: {
-        fontSize: 20,
+        fontSize: 22,
         alignSelf: "center",
         color: "black",
         fontWeight: "500",
+        fontFamily: "Chalkboard SE",
     },
     backgroundImage: {
         flex: 1,
