@@ -216,7 +216,7 @@ export default function SocialScreen() {
                         <View style={{flexDirection: 'row'}}>
                             <FontAwesome.Button onPress={() => SMS.sendSMSAsync(
                                 ['6504779097'],
-                                '',)}
+                                'Drink some more water!',)}
                             style={{ backgroundColor: '#3b5998', flexDirection: "row"}}>
                                 <Ionicons name="chatbubble-ellipses-outline" size={20} color="black" />
                             </FontAwesome.Button>
