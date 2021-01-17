@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { render } from 'react-dom';
-import { ImagePropTypes, Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import SleepModal from '../modals/SleepModal';
 import WaterModal from '../modals/WaterModal';
@@ -150,6 +150,9 @@ export default function HomeScreen() {
 
     return (
             <View style={styles.container}>
+
+                <Image source = {require("../images/today.png")} style = {{width: "45%", height: "15%", alignSelf: "center", }} />
+
                 <TouchableOpacity
                     onPress = {() => setToggleWaterModal(true)}>
                     <ProgressBar

@@ -3,9 +3,9 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: `#556789`,
-        marginTop: 120,
+        backgroundColor: `#34457E`,
         alignItems: 'center',
+        paddingVertical: "30%",
     },
     header: {
         flexDirection: "row",
@@ -57,7 +57,7 @@ export default StyleSheet.create({
         resizeMode: "contain",
         borderTopRightRadius: 20,
         borderBottomRightRadius: 20,
-        overlayColor: "#556789"
+        overlayColor: "#34457E"
     },
     profileImg: {
         height: 120,
