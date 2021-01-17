@@ -11,8 +11,9 @@ import FriendModal from '../modals/FriendModal'
 // Stats -> to display stats on friends list
 export default function SocialScreen() {
 
-    const [loading, setLoading] = useState(true); // Set loading to true on component mount
-    const [friends, setFriends] = useState([]); // Initial empty array of users
+    const [loading, setLoading] = useState(true); 
+    const [friends, setFriends] = useState([]); 
+    const [friendInfo, setFriendInfo] = useState([]); //
 
     const [friendModalToggle, setFriendModalToggle] = useState(false);
 
@@ -23,17 +24,30 @@ export default function SocialScreen() {
         .doc(user.uid)
         .onSnapshot(queryDocumentSnapshot => {
             const friends = []
+            const friendInfo = []
             for (var i in queryDocumentSnapshot.get('friends')){
-                if (queryDocumentSnapshot.get('friends')[i] === true){
-                    friends.push(i);
+                friends.push(queryDocumentSnapshot.get('friends')[i])
+            }
+        setFriends(friends);
+        const all_users = firebase.firestore().collection('users').get()
+        .then(userSnapshot => {
+            userSnapshot.forEach(userDoc => {
+                // console.log('_______')
+                // console.log(['3', '4'].includes('3'))
+                // console.log(userDoc.data().uid);
+                // console.log(friends);
+                // console.log(friends.includes(userDoc.data().uid));
+                if (friends.includes(userDoc.data().uid)){
+                    friendInfo.push(userDoc.data())
                 }
-            }  
-            setFriends(friends);
-            setLoading(false);
-      });
-      // Unsubscribe from events when no longer in use
-      return () => subscriber();
-  }, []);
+            })
+        setFriendInfo(friendInfo);
+        })
+        })
+        setLoading(false);
+        
+    }, []);
+      
 
   if (loading) {
       return <ActivityIndicator />;
@@ -53,14 +67,19 @@ export default function SocialScreen() {
 
             <SafeAreaView>
                 <FlatList
-                    data={friends}
+                    data={friendInfo}
+                    //keyExtractor={(item, index) => item.key} // Need to revisit
                     renderItem={({item}) => (
                         <View style={styles.listItem}>
                             <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: "row" }}>
-                                <Text style={{ fontSize: 18, color: "#556789" }}> Friend: {item}</Text>
+                                <Text style={{ fontSize: 18, color: "#556789" }}> {item.firstName} {item.lastName}</Text>
+                                <Text style={{ fontSize: 12, color: "#556789" }}> Water: {false ? item.water[0]: '0'} / {false ? item.water[1]: '0'}  </Text>
+                                <Text style={{ fontSize: 12, color: "#556789" }}> Sleep: {false ? item.sleep[0]: '0'} / {false ? item.sleep[1]: '0'}  </Text>
+                                <Text style={{ fontSize: 12, color: "#556789" }}> Exercise: {false ? item.exercise[0]: '0'} / {false ? item.exercise[1]: '0'}  </Text>
                                 <View style={{flexDirection: 'row'}}>
+                                    {/* typeof item.water[0] === 'undefined */}
                                     <FontAwesome.Button onPress={() => SMS.sendSMSAsync(
-                                        ['6504779097'],
+                                        [item.phoneNumber],
                                         'Drink some more water!',)}
                                     style={{ backgroundColor: 'white', flexDirection: "row"}}>
                                         <Ionicons name="chatbubble-ellipses-outline" size={20} color="black" />
