@@ -21,6 +21,17 @@ export default function HomeScreen() {
         setCurWater(curWater + change)
     }
 
+    function GoalWaterHandler(change) {
+        if (goalWater <= 0 && change < 0) {
+            console.log("Can't have less");
+            return
+        } else if (curWater > goalWater) {
+            console.log("Too little water");
+        }
+
+        setGoalWater(goalWater + change)
+    }
+
 
     return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -42,13 +53,13 @@ export default function HomeScreen() {
 
                 <WaterModal
                     visible = {toggleWaterModal}
-                    onCancel = {() => setToggleWaterModal(false)}
-                    ok = {() => console.log("HELLo")}
+                    ok = {() => setToggleWaterModal(false)}
                     curWater = {curWater}
                     goalWater = {goalWater}
                     addCurWater = {() => {CurWaterHandler(1)}}
                     minusCurWater = {() => {CurWaterHandler(-1)}}
-                    updateGoalWater = {() => {UpdateGoalWater}}
+                    addGoalWater = {() => {GoalWaterHandler(1)}}
+                    minusGoalWater = {() => {GoalWaterHandler(-1)}}
                 />
             </View>
         )
