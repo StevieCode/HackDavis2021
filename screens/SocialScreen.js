@@ -163,7 +163,6 @@ export default function SocialScreen() {
                 }
             }  
             setFriends(friends);
-            console.log(friends);
             setLoading(false);
       });
       // Unsubscribe from events when no longer in use
