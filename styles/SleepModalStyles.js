@@ -28,11 +28,17 @@ export default StyleSheet.create({
         marginLeft: 140,
         marginTop: 60,
     },
+    curContainer: {
+        fontSize: 20,
+        alignSelf: "center",
+        marginLeft: "35%",
+        marginTop: "20%",
+    },
     goalContainer: {
         fontSize: 20,
         alignSelf: "center",
-        marginLeft: 140,
-        marginTop: 240,
+        marginLeft: "35%",
+        marginTop: "50%",
     },
     waterText: {
         fontSize: 20,

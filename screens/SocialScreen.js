@@ -1,54 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import { Text, View, ActivityIndicator, SafeAreaView, FlatList} from 'react-native';
-// import * as firebase from 'firebase';
-// import Fire from '../Fire';
-
-// export default function SocialScreen() {
-//     const [loading, setLoading] = useState(true); // Set loading to true on component mount
-//     const [friends, setFriends] = useState([]); // Initial empty array of users
-
-//     useEffect(() => {
-//         const user = firebase.auth().currentUser
-//         const subscriber = firebase.firestore()
-//         .collection('users')
-//         .doc(user.uid)
-//         .onSnapshot(queryDocumentSnapshot => {
-//             const friends = []
-//             for (var i in queryDocumentSnapshot.get('friends')){
-//                 if (queryDocumentSnapshot.get('friends')[i] === true){
-//                     friends.push(i);
-//                 }
-//             }          
-//               setFriends(friends);
-//               console.log(friends);
-//               setLoading(false);
-//         });
-
-//         // Unsubscribe from events when no longer in use
-//         return () => subscriber();
-//     }, []);
-
-//     if (loading) {
-//         return <ActivityIndicator />;
-//     }
-//     return (
-//         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//             <Text>Social Page</Text>
-//             <SafeAreaView>
-//             <FlatList
-//                 data={friends}
-//                 keyExtractor={(item, index) => item.key}
-//                 renderItem={({item}) => (
-//                     <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//                         <Text>Friend: {item}</Text>
-//                     </View>
-//                 )}
-//             />
-//             </SafeAreaView>
-//         </View>
-//     )
-// }
-
 import React, { useState, useEffect, Component } from 'react';
 import { Text, View, TouchableOpacity, ActivityIndicator, SafeAreaView, FlatList, ScrollView } from 'react-native';
 import * as SMS from 'expo-sms';
@@ -58,7 +7,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import {ExpandableListView} from 'react-native-expandable-listview';
 import * as firebase from 'firebase';
 import Fire from '../Fire';
-
+import FriendModal from '../modals/FriendModal'
 
 
 // Aim to store phone number -> for messaging someone
@@ -150,6 +99,8 @@ export default function SocialScreen() {
     const [loading, setLoading] = useState(true); // Set loading to true on component mount
     const [friends, setFriends] = useState([]); // Initial empty array of users
 
+    const [friendModalToggle, setFriendModalToggle] = useState(false);
+
     useEffect(() => {
         const user = firebase.auth().currentUser
         const subscriber = firebase.firestore()
@@ -177,11 +128,6 @@ export default function SocialScreen() {
   }
 
 
-
-
-
-
-
     function handleItemClick({index}) {
         console.log(index);
     };
@@ -191,59 +137,50 @@ export default function SocialScreen() {
     };
 
 
-
-
     return (
 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' , marginTop: 120, backgroundColor: "#3b5998"}}>
-        <FontAwesome5 name="user-friends" size={30} color="black" />
-       
-        <View style={{flexDirection: 'row'}}>
-            <Text style={{ fontSize: 30, color: 'black' }}>Friends List ({friends.length}) </Text> 
-            <Ionicons name="person-add" size={24} color="black" />
-        </View>
-        <Text style={{ fontSize: 18, color: 'white' }}> </Text> 
-        <Text style={{ fontSize: 18, color: 'white' }}>Remind your friends to stay healthy</Text>
-        <Text style={{ fontSize: 18, color: 'white' }}> </Text> 
-        <Text style={{ fontSize: 14, color: 'white' }}>Eg: Drink more water today!</Text>
-        <Text style={{ fontSize: 14, color: 'white' }}> </Text> 
-        <SafeAreaView>
-            <FlatList
-                data={friends}
-                renderItem={({item}) => (
-                    <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: "row" }}>
-                        <Text>Friend: {item}</Text>
-                        <View style={{flexDirection: 'row'}}>
-                            <FontAwesome.Button onPress={() => SMS.sendSMSAsync(
-                                ['6504779097'],
-                                'Drink some more water!',)}
-                            style={{ backgroundColor: '#3b5998', flexDirection: "row"}}>
-                                <Ionicons name="chatbubble-ellipses-outline" size={20} color="black" />
-                            </FontAwesome.Button>
-                         </View>
-                    </View>
-                )}
-            />
-        </SafeAreaView>
+            <FontAwesome5 name="user-friends" size={30} color="black" />
         
-        {/* <ExpandableListView
-            //ExpandableListViewStyles={{borderTopWidth:10}} // styles to expandable listview
-            renderInnerItemSeparator={true} // true or false, render separator between inner items
-            renderItemSeparator={true} // true or false, render separator between Items
-            //itemContainerStyle={{color:'white'}} // add your styles to all item container of your list
-            //itemLabelStyle={{color:'white'}} // add your styles to all item text of your list
-            // customChevron={{}} // your custom image to the indicator
-            // chevronColor="white" // color of the default indicator
-            //innerItemContainerStyle={{color:'white'}} // add your styles to all inner item containers of your list
-            //itemLabelStyle={{color:'white'}} // add your styles to all inner item text of your list
-            // itemImageIndicatorStyle={{}} // add your styles to the image indicator of your list
-            // animated={true} // sets all animations on/off, default on
-            // defaultLoaderStyles?: ViewStyle; // Set your styles to default loader (only for animated={true})
-            // customLoader?: JSX.Element; Pass your custom loader, while your content is measured and rendered (only for animated={true})
-            data={CONTENT} 
-            onInnerItemClick={handleInnerItemClick}
-            onItemClick={handleItemClick}
-        /> */}
+            <View style={{flexDirection: 'row'}}>
+                <Text style={{ fontSize: 30, color: 'black' }}>Friends List ({friends.length}) </Text> 
+                <Ionicons name="person-add" size={24} color="black" onPress = {()=>setFriendModalToggle(true)}/>
+            </View>
+            <Text style={{ fontSize: 18, color: 'white' }}> </Text> 
+            <Text style={{ fontSize: 18, color: 'white' }}>Remind your friends to stay healthy</Text>
+            <Text style={{ fontSize: 18, color: 'white' }}> </Text> 
+            <Text style={{ fontSize: 14, color: 'white' }}>Eg: Drink more water today!</Text>
+            <Text style={{ fontSize: 14, color: 'white' }}> </Text> 
+            <SafeAreaView>
+                <FlatList
+                    data={friends}
+                    renderItem={({item}) => (
+                        <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: "row" }}>
+                            <Text>Friend: {item}</Text>
+                            <View style={{flexDirection: 'row'}}>
+                                <FontAwesome.Button onPress={() => SMS.sendSMSAsync(
+                                    ['6504779097'],
+                                    'Drink some more water!',)}
+                                style={{ backgroundColor: '#3b5998'}}>
+                                    <Ionicons name="chatbubble-ellipses-outline" size={20} color="black" />
+                                </FontAwesome.Button>
+                            </View>
+
+                            
+                        </View>
+
+                    )}
+                />
+
+           
+            </SafeAreaView>
+
+            <FriendModal 
+                visible = {friendModalToggle}
+                back = {() => setFriendModalToggle(false)}
+            />
+            
+                
         </View>
     );
 };
