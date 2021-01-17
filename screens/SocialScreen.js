@@ -5,6 +5,7 @@ import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import * as firebase from 'firebase';
 import Fire from '../Fire';
 import FriendModal from '../modals/FriendModal'
+import { initialWindowMetrics } from 'react-native-safe-area-context';
 
 
 // Aim to store phone number -> for messaging someone
@@ -72,10 +73,11 @@ export default function SocialScreen() {
                     renderItem={({item}) => (
                         <View style={styles.listItem}>
                             <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: "row" }}>
+                                {/* <Text style={{ fontSize: 12, color: "#556789" }}> Test: {'exercise' in item ? item.exercise[0]: '15'}</Text> */}
                                 <Text style={{ fontSize: 18, color: "#556789" }}> {item.firstName} {item.lastName}</Text>
-                                <Text style={{ fontSize: 12, color: "#556789" }}> Water: {false ? item.water[0]: '0'} / {false ? item.water[1]: '0'}  </Text>
-                                <Text style={{ fontSize: 12, color: "#556789" }}> Sleep: {false ? item.sleep[0]: '0'} / {false ? item.sleep[1]: '0'}  </Text>
-                                <Text style={{ fontSize: 12, color: "#556789" }}> Exercise: {false ? item.exercise[0]: '0'} / {false ? item.exercise[1]: '0'}  </Text>
+                                <Text style={{ fontSize: 12, color: "#556789" }}> Water: {'water' in item ? item.water[0]: '0'} / {'water' in item ? item.water[1]: '0'}  </Text>
+                                <Text style={{ fontSize: 12, color: "#556789" }}> Sleep: {'sleep' in item ? item.sleep[0]: '0'} / {'sleep' in item ? item.sleep[1]: '0'}  </Text>
+                                <Text style={{ fontSize: 12, color: "#556789" }}> Exercise: {'exercise' in item ? item.exercise[0]: '0'} / {'exercise' in item ? item.exercise[1]: '0'}  </Text>
                                 <View style={{flexDirection: 'row'}}>
                                     {/* typeof item.water[0] === 'undefined */}
                                     <FontAwesome.Button onPress={() => SMS.sendSMSAsync(
