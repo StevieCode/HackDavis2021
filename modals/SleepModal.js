@@ -4,8 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '../styles/WaterModalStyles';
 
-
-export default WaterModal = props => {
+export default SleepModal = props => {
     
     return (
         <Modal visible = {props.visible} >
@@ -17,20 +16,20 @@ export default WaterModal = props => {
                     </TouchableOpacity>
                 </View>
 
-                <ImageBackground source = {require("../images/water_background.png")} style = {styles.backgroundImage}>
+                <ImageBackground source = {require("../images/sleep_background.png")} style = {styles.backgroundImage}>
 
                     {/* Goal Water */}
                     <View style = {styles.goalContainer}>
                         <TouchableOpacity
-                            onPress = {props.addGoalWater}
+                            onPress = {props.addGoalSleep}
                         >
                             <Image source = {require("../images/up_arrow.png")} style = {styles.arrow}></Image>
                         </TouchableOpacity>
 
-                        <Text style = {styles.waterText}>Goal: {props.goalWater} cups</Text>
+                        <Text style = {styles.waterText}>Goal: {props.goalSleep} hours</Text>
 
                         <TouchableOpacity
-                            onPress = {props.minusGoalWater}
+                            onPress = {props.minusGoalSleep}
                         >
                             <Image source = {require("../images/down_arrow.png")} style = {styles.arrow}></Image>
                         </TouchableOpacity>
@@ -39,15 +38,15 @@ export default WaterModal = props => {
                     {/* Cur Water */}
                     <View style = {styles.curContainer}>
                         <TouchableOpacity
-                            onPress = {props.addCurWater}
+                            onPress = {props.addCurSleep}
                         >
                             <Image source = {require("../images/up_arrow.png")} style = {styles.arrow}></Image>
                         </TouchableOpacity>
 
-                        <Text style = {styles.waterText}>   Current: {props.curWater} cups</Text>
+                        <Text style = {styles.waterText}>   Current: {props.curSleep} hours</Text>
 
                         <TouchableOpacity
-                            onPress = {props.minusCurWater}
+                            onPress = {props.minusCurSleep}
                         >
                             <Image source = {require("../images/down_arrow.png")} style = {styles.arrow}></Image>
                         </TouchableOpacity>
