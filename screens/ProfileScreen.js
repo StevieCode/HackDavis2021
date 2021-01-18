@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState} from 'react';
 import { Text, View, TouchableOpacity, Image, TouchableHighlight } from 'react-native';
 import styles from '../styles/ProfileScreenStyles';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import * as firebase from 'firebase';
+import Fire from '../Fire';
 
 export default function LeaderBoardScreen() {
-    const [selectedImage, setSelectedImage] = React.useState(null);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [email, setEmail] = useState('');
 
+    useEffect( () => {
+        const user = firebase.auth().currentUser;
+        const userRef = firebase.firestore().collection('users').doc(user.uid);
+        userRef.get().then(function(doc) {
+            typeof doc.data().firstName != undefined ? setFirstName(doc.data().firstName) : setFirstName('');
+            typeof doc.data().lastName != undefined ? setLastName(doc.data().lastName) : setLastName('');
+            typeof doc.data().phoneNumber != undefined ? setPhoneNumber(doc.data().phoneNumber) : setPhoneNumber('');
+            typeof doc.data().email != undefined ? setEmail(doc.data().email) : setEmail('');
+        });
+
+    }, [])
     let openImagePickerAsync = async () => {
         let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (permissionResult.granted === false) {
@@ -32,9 +49,9 @@ export default function LeaderBoardScreen() {
                                     <Ionicons name="create-outline" size={20} color="white" />
                                 </View>
                             </TouchableOpacity>
-                        <Text  style= {styles.fullName}> John Doe</Text>
-                        <Text  style= {styles.regText}> 1(650)223-2932</Text>
-                        <Text  style= {styles.regText}> JohnDoe22@gmail.com</Text>
+                        <Text  style= {styles.fullName}> {firstName} {lastName} </Text>
+                        <Text  style= {styles.regText}> {phoneNumber}</Text>
+                        <Text  style= {styles.regText}> {email}</Text>
                  </View>
             );
       }
@@ -48,9 +65,9 @@ export default function LeaderBoardScreen() {
                         <Ionicons name="create-outline" size={20} color="white" />
                     </View>
                 </TouchableOpacity>
-            <Text  style= {styles.fullName}> John Doe</Text>
-            <Text  style= {styles.regText}> 1(650)223-2932</Text>
-            <Text  style= {styles.regText}> JohnDoe22@gmail.com</Text>
+            <Text  style= {styles.fullName}> {firstName} {lastName}</Text>
+            <Text  style= {styles.regText}> {phoneNumber}</Text>
+            <Text  style= {styles.regText}> {email}</Text>
         </View>
     
     )
