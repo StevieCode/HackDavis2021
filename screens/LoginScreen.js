@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ImageBackground } from 'react-native';
 import firebase from 'firebase';
 import Fire from '../Fire';
 import HandleLogin from '../services/HandleLogin';

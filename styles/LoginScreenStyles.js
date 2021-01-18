@@ -41,7 +41,7 @@ export default StyleSheet.create({
         borderBottomWidth: .5,
         height: 40,
         fontSize: 14,
-        color: "black",
+        color: "white",
     },
     button: {
         marginBottom: 15,
