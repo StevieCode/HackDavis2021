@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import firebase from 'firebase';
+import Fire from '../Fire';
 import HandleLogin from '../services/HandleLogin';
 import styles from '../styles/LoginScreenStyles';
 
@@ -9,19 +10,22 @@ export default class LoginScreen extends React.Component {
         phoneNumber: "",
         password: "",
         errorMessage: null,
+        email: "",
     }
-
     HandleLogin = () => {
-        HandleLogin(this.state.phoneNumber, this.state.password);
+        const {email, password} = this.state
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .catch(error => this.setState({errorMessage: error.message}));
     }
-
     render(){
         return (
             <TouchableWithoutFeedback onPress={() => {
                 Keyboard.dismiss();
             }}>
             <View style={styles.container}>
-                <Text style={styles.title}>We The Health</Text>
+                <Text style={styles.title}>What The Health</Text>
 
                 <View style={styles.error}>
                     {this.state.errorMessage && <Text style={styles.errorText}>{this.state.errorMessage}</Text>}
@@ -29,11 +33,11 @@ export default class LoginScreen extends React.Component {
 
                 <View style={styles.form}>
                     <View>
-                        <Text style={styles.inputTitle}> PHONE NUMBER </Text>
+                        <Text style={styles.inputTitle}> EMAIL </Text>
                         <TextInput 
                             style={styles.input}
-                            onChangeText={phoneNumber => this.setState({phoneNumber})}
-                            value = {this.state.phoneNumber}
+                            onChangeText={email => this.setState({email})}
+                            value = {this.state.email}
                         ></TextInput>
                     </View>
 
