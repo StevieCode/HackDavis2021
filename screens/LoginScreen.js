@@ -32,7 +32,7 @@ export default class LoginScreen extends React.Component {
 
                 <View style={styles.form}>
                     <View>
-                        <Text style={styles.inputTitle}> PHONE NUMBER </Text>
+                        <Text style={styles.inputTitle}> EMAIL ADDRESS </Text>
                         <TextInput 
                             style={styles.input}
                             onChangeText={phoneNumber => this.setState({phoneNumber})}

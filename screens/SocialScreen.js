@@ -59,13 +59,13 @@ export default function SocialScreen() {
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' , marginTop: 120, backgroundColor: "#34457E"}}>
             <FontAwesome5 name="user-friends" size={30} color="#34457E" />
             <View style={{flexDirection: 'row'}}>
-                <Text style={{  fontSize: 30, color: "#34457E" }}>Friends List ({friends.length}) </Text> 
+                <Text style={{  fontSize: 30, color: "#34457E", fontFamily: "Chalkboard SE" }}>Friends List ({friends.length}) </Text> 
                 <Ionicons  name="person-add" size={24} color= "#34457E" onPress = {() => setFriendModalToggle(true)}/>
 
 
             </View>
             <Text style={{ fontSize: 18, color: 'white' }}> </Text> 
-            <Text style={{ fontSize: 18, color: 'white' }}>Remind your friends to stay healthy!</Text>
+            <Text style={{ fontSize: 18, color: 'white', fontFamily: "Chalkboard SE" }}>Remind your friends to stay healthy!</Text>
             <Text style={{ fontSize: 18, color: 'white' }}> </Text> 
 
             <SafeAreaView>
@@ -74,13 +74,13 @@ export default function SocialScreen() {
                     //keyExtractor={(item, index) => item.key} // Need to revisit
                     renderItem={({item}) => (
                         <View style={styles.listItem}>
-                            <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: "row" }}>
+                            <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: "row",  }}>
 
                                 {/* <Text style={{ fontSize: 12, color: "#556789" }}> Test: {'exercise' in item ? item.exercise[0]: '15'}</Text> */}
-                                <Text style={{ fontSize: 18, color: "#556789" }}> {item.firstName} {item.lastName}</Text>
-                                <Text style={{ fontSize: 12, color: "#556789" }}> Water: {'water' in item ? item.water[0]: '0'} / {'water' in item ? item.water[1]: '0'}  </Text>
-                                <Text style={{ fontSize: 12, color: "#556789" }}> Sleep: {'sleep' in item ? item.sleep[0]: '0'} / {'sleep' in item ? item.sleep[1]: '0'}  </Text>
-                                <Text style={{ fontSize: 12, color: "#556789" }}> Exercise: {'exercise' in item ? item.exercise[0]: '0'} / {'exercise' in item ? item.exercise[1]: '0'}  </Text>
+                                <Text style={{ fontSize: 18, color: "#556789",fontFamily: "Chalkboard SE" }}> {item.firstName} {item.lastName}</Text>
+                                <Text style={{ fontSize: 12, color: "#556789",fontFamily: "Chalkboard SE" }}> Water: {'water' in item ? item.water[0]: '0'} / {'water' in item ? item.water[1]: '0'}  </Text>
+                                <Text style={{ fontSize: 12, color: "#556789",fontFamily: "Chalkboard SE" }}> Sleep: {'sleep' in item ? item.sleep[0]: '0'} / {'sleep' in item ? item.sleep[1]: '0'}  </Text>
+                                <Text style={{ fontSize: 12, color: "#556789",fontFamily: "Chalkboard SE" }}> Exercise: {'exercise' in item ? item.exercise[0]: '0'} / {'exercise' in item ? item.exercise[1]: '0'}  </Text>
 
                                 <View style={{flexDirection: 'row'}}>
                                     {/* typeof item.water[0] === 'undefined */}
