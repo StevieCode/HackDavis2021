@@ -85,8 +85,8 @@ export default class RegisterScreen extends React.Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity activeOpacity={0.5} onPress={ ()=> this.props.navigation.navigate("Login")}>
-                    <Text style={{fontSize: 14, fontWeight: '600', textAlign: 'center'}}>
-                        Already have an account? <Text style = {{color: '#f7287b'}}> Log In </Text>
+                    <Text style={{fontSize: 14, fontWeight: '600', textAlign: 'center', color: "white"}}>
+                        Already have an account? Log In
                     </Text>
                 </TouchableOpacity>
                 

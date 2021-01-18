@@ -3,12 +3,14 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: `#34457E`,
     },
     title: {
         marginTop: 30,
         fontSize: 18,
         fontWeight: "300",
         textAlign: 'center',
+        color: "white",
     },
     error: {
         height: 70,
@@ -27,19 +29,19 @@ export default StyleSheet.create({
         
     },
     inputTitle: {
-        color: "#8A8F9E",
-        fontSize: 12,
+        color: "white",
+        fontSize: 18,
     },
     input: {
         borderBottomColor: "#8A8F9E",
         borderBottomWidth: .5,
         height: 40,
         fontSize: 14,
-        color: "black",
+        color: "white",
     },
     button: {
         marginBottom: 15,
-        backgroundColor: '#f7287b',
+        backgroundColor: '#7D8AB6',
         marginHorizontal: 30,
         borderRadius: 4,
         height: 40,
@@ -48,7 +50,7 @@ export default StyleSheet.create({
         borderRadius: 15,
     },
     signup: {
-        backgroundColor: 'white',
+        backgroundColor: `#34457E`,
         marginBottom: 15,
         marginHorizontal: 30,
         borderRadius: 4,

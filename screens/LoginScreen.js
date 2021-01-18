@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ImageBackground } from 'react-native';
 import firebase from 'firebase';
 import HandleLogin from '../services/HandleLogin';
 import styles from '../styles/LoginScreenStyles';
+
 
 export default class LoginScreen extends React.Component {
     state = {
@@ -17,11 +18,13 @@ export default class LoginScreen extends React.Component {
 
     render(){
         return (
-            <TouchableWithoutFeedback onPress={() => {
+            <TouchableWithoutFeedback 
+
+                onPress={() => {
                 Keyboard.dismiss();
             }}>
+            <ImageBackground source = {require("../images/login_background.png")} style = {{flex: 1,}}>
             <View style={styles.container}>
-                <Text style={styles.title}>We The Health</Text>
 
                 <View style={styles.error}>
                     {this.state.errorMessage && <Text style={styles.errorText}>{this.state.errorMessage}</Text>}
@@ -61,10 +64,11 @@ export default class LoginScreen extends React.Component {
                     activeOpacity={0.5}
                     onPress={()=>this.props.navigation.navigate("Register")}
                 >
-                    <Text style={{color: '#f7287b', fontSize: 16, fontWeight: '600'}}>Create Account</Text>
+                    <Text style={{color: '#7D8AB6', fontSize: 16, fontWeight: '600'}}>Create Account</Text>
                 </TouchableOpacity>
                 
             </View>
+            </ImageBackground>
             </TouchableWithoutFeedback>
         )
     }

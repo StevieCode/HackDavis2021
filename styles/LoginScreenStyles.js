@@ -31,8 +31,9 @@ export default StyleSheet.create({
     },
     inputTitle: {
         color: "#8A8F9E",
-        fontSize: 12,
-        fontFamily: "Chalkboard SE"
+        fontSize: 20,
+        fontFamily: "Chalkboard SE",
+        color: "white",
 
     },
     input: {
@@ -44,7 +45,7 @@ export default StyleSheet.create({
     },
     button: {
         marginBottom: 15,
-        backgroundColor: '#f7287b',
+        backgroundColor: '#7D8AB6',
         marginHorizontal: 30,
         borderRadius: 4,
         height: 40,
