@@ -1,5 +1,6 @@
 # What The Health (HackDavis2021)
 
+https://expo.io/@stevefeng37/projects/hackdavis2021
 
 ## Inspiration
 Ever since the COVID-19 pandemic began, we thought that a lot of people had lost their daily routine which allowed them to live a healthy lifestyle. Our objective was to create an app that would encourage users to achieve their daily goals of adequate water, sleep, and exercise ( The 3 essential components of a healthy lifestyle we thought were applicable to all users ). By introducing a support network into our app, friends and family could support each other and embark on the journey towards a healthy lifestyle together! 
