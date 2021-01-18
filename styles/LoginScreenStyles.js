@@ -9,6 +9,8 @@ export default StyleSheet.create({
         fontSize: 18,
         fontWeight: "300",
         textAlign: 'center',
+        fontFamily: "Chalkboard SE"
+
     },
     error: {
         height: 70,
@@ -20,6 +22,7 @@ export default StyleSheet.create({
         color: '#f7287b',
         fontWeight: '600',
         textAlign: 'center',
+        fontFamily: "Chalkboard SE"
     },
     form: {
         marginBottom: 50,
@@ -29,6 +32,8 @@ export default StyleSheet.create({
     inputTitle: {
         color: "#8A8F9E",
         fontSize: 12,
+        fontFamily: "Chalkboard SE"
+
     },
     input: {
         borderBottomColor: "#8A8F9E",

@@ -68,6 +68,12 @@ export default function LeaderBoardScreen() {
             <Text  style= {styles.fullName}> {firstName} {lastName}</Text>
             <Text  style= {styles.regText}> {phoneNumber}</Text>
             <Text  style= {styles.regText}> {email}</Text>
+
+            <TouchableOpacity
+                onPress = {() => {firebase.auth().signOut()}}
+            >
+                <Text style = {{color: "white", marginTop: "30%", fontSize: 25, fontFamily: "Chalkboard SE"}}>Log Out</Text>
+            </TouchableOpacity>
         </View>
     
     )
