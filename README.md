@@ -1,6 +1,10 @@
 # What The Health (HackDavis2021)
 
+## Expo Project
 https://expo.io/@stevefeng37/projects/hackdavis2021
+
+## Video Demo
+https://www.youtube.com/watch?v=fhggW9S3nzo&ab_channel=SteveFeng
 
 ## Inspiration
 Ever since the COVID-19 pandemic began, we noticed that many people had to drastically change their daily routine. This often led to healthy lifestyle activities being forgotten. Our objective for this year's Hackathon was to create an app that would encourage users to achieve their daily goals of adequate water, sleep, and exercise ( The 3 essential components of a healthy lifestyle we thought were applicable to all users ). By introducing a support network into our app, friends/family can support each other and embark on the journey towards a healthy lifestyle together! 
